@@ -1,0 +1,23 @@
+body {
+  background: radial-gradient(#e5e5e5, #ffff, #e5e5e5);
+}
+.card {
+  width: 20rem;
+  margin: 0.5rem;
+}
+
+.card:hover {
+  box-shadow: 5px 10px 20px 1px rgb(0, 0, 0.259) !important;
+}
+
+.card-body {
+  padding: 3rem 0 !important;
+}
+
+.card-text {
+  font-size: 0.9rem;
+  padding: 0.4rem 2rem;
+}
+.container-fluid .row {
+  padding-top: 6rem;
+}
