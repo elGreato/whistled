@@ -5,7 +5,7 @@ class Mart extends Component {
   render() {
     return (
       <div style={{ marginTop: "6em" }}>
-        <h1>this is the Mart .. load MainGrid here later</h1>
+        <h1>this is the Mart .. load MainGrid here .later</h1>
       </div>
     );
   }
