@@ -1,4 +1,4 @@
-var Marketplace = artifacts.require("Marketplace.sol");
+var Marketplace = artifacts.require("./client/src/contracts/Marketplace.sol");
 
 contract("Marketplace", accounts => {
   //all tests go inside here
