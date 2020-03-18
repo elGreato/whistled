@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import SimpleStorageContract from "./contractsAbis/SimpleStorage.json";
+import SimpleStorageContract from "./contracts/SimpleStorage.json";
 import getWeb3 from "./utils/getWeb3";
 import NavBar from "./components/NavBar";
 import "./App.css";
-import MainGrid from "./components/MainGrid.jsx";
+
 import Welcome from "./components/Welcome.jsx";
 import Mart from "./components/Mart";
 import NewCase from "./components/NewCase.jsx";
@@ -58,20 +58,17 @@ class App extends Component {
       return <div>Loading Web3, accounts, and contract...</div>;
     }
     return (
-      ({ account } = this.props),
-      (
-        <div className="App">
-          <NavBar />
-          <Router>
-            {<MainGrid />}
-            <Switch>
-              <Route exact path="/" component={Welcome} />
-              <Route path="/mart" component={Mart} />
-              <Route path="/newcase" component={NewCase} />
-            </Switch>
-          </Router>
-        </div>
-      )
+      <div className="App">
+        <NavBar account={this.state.accounts[0]} />
+
+        <Router>
+          <Switch>
+            <Route exact path="/" component={Welcome} />
+            <Route path="/mart" component={Mart} />
+            <Route path="/newcase" component={NewCase} />
+          </Switch>
+        </Router>
+      </div>
     );
   }
 }
