@@ -16,9 +16,10 @@ contract Marketplace {
 
     struct Case {
         uint256 caseId;
-        string title;
-        uint256 price;
+        string castType; //change this to enum
+        string caseTitle;
+        uint256 casePrice;
         address payable owner;
-        bool purchased;
+        bool isPurchased;
     }
 }
