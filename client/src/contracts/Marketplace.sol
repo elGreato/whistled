@@ -10,16 +10,21 @@ contract Marketplace {
     //similar to linkedList
     mapping(uint256 => Case) public cases;
 
+    //enum of case Types
+    enum CaseType {Bribery, Extortion}
+
     constructor() public {
         contractName = "Whistled Market";
     }
 
     struct Case {
         uint256 caseId;
-        string castType; //change this to enum
+        CaseType castType; //change this to enum
         string caseTitle;
         uint256 casePrice;
         address payable owner;
         bool isPurchased;
     }
+
+    event CaseCreated(uint256 caseId, string cast);
 }
