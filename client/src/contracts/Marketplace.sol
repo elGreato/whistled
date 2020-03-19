@@ -11,7 +11,7 @@ contract Marketplace {
     mapping(uint256 => Case) public cases;
 
     //enum of case Types
-    enum CaseType {Bribery, Extortion}
+    enum CaseType {Bribery, Extortion, MoneyLaundry}
 
     constructor() public {
         contractName = "Whistled Market";
@@ -19,12 +19,46 @@ contract Marketplace {
 
     struct Case {
         uint256 caseId;
-        CaseType castType; //change this to enum
+        CaseType caseType; //change this to enum
         string caseTitle;
+        string caseDescribtion;
         uint256 casePrice;
         address payable owner;
         bool isPurchased;
     }
 
-    event CaseCreated(uint256 caseId, string cast);
+    event CaseCreated(
+        uint256 caseId,
+        CaseType caseType,
+        string caseTitle,
+        string caseDescribtion,
+        uint256 casePrice,
+        address payable owner,
+        bool isPurchased
+    );
+
+    function createCase(string memory _caseTitle,CaseType _caseType,string memory _caseDescribtion, uint256 _casePrice) public{
+        caseCount++;
+        //create the case
+        cases[caseCount] = Case(
+            caseCount,
+            _caseType,
+            _caseTitle,
+            _caseDescribtion,
+            _casePrice,
+            msg.sender,
+            false);
+            
+        //emit the event
+        emit CaseCreated(
+            caseCount,
+            _caseType,
+            _caseTitle,
+            _caseDescribtion,
+            _casePrice,
+            msg.sender,
+            false
+        );
+
+    }
 }
