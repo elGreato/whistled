@@ -19,8 +19,8 @@ contract("Marketplace", accounts => {
     });
 
     it("has a name", async () => {
-      const name = await marketplace.name();
-      assert.equal(name, "Whistled marketplace");
+      const name = await marketplace.contractName();
+      assert.equal(name, "Whistled Market");
     });
   });
 });
