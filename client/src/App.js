@@ -4,9 +4,9 @@ import getWeb3 from "./utils/getWeb3";
 import NavBar from "./components/NavBar";
 import "./App.css";
 
-import Welcome from "./components/Welcome.jsx";
+import Welcome from "./components/Welcome";
 import Mart from "./components/Mart";
-import NewCase from "./components/NewCase.jsx";
+import NewCase from "./components/NewCase";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 class App extends Component {

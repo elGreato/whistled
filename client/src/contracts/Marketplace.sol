@@ -22,6 +22,7 @@ contract Marketplace {
         CaseType caseType; //change this to enum
         string caseTitle;
         string caseDescribtion;
+        string caseLocation;
         uint256 casePrice;
         address payable owner;
         bool isPurchased;
@@ -32,6 +33,7 @@ contract Marketplace {
         CaseType caseType,
         string caseTitle,
         string caseDescribtion,
+        string caseLocation,
         uint256 casePrice,
         address payable owner,
         bool isPurchased
@@ -42,22 +44,28 @@ contract Marketplace {
         CaseType caseType,
         string caseTitle,
         string caseDescribtion,
+        string caseLocation,
         uint256 casePrice,
         address payable owner,
         bool isPurchased
     );
 
-    function createCase(string memory _caseTitle,CaseType _caseType,string memory _caseDescribtion,uint256 _casePrice) public {
+    function createCase(string memory _caseTitle,
+        CaseType _caseType,
+        string memory _caseDescribtion,
+         string memory _caseLocation,
+         uint256 _casePrice
+         ) public {
         //requires valid name and price
         require(bytes(_caseTitle).length > 0, "Case Title is not valid!");
         require(_casePrice > 0, "Case price is not valid!");
 
         caseCount++;
         //create the case
-        cases[caseCount] = Case(caseCount,_caseType,_caseTitle,_caseDescribtion,_casePrice,msg.sender,false);
+        cases[caseCount] = Case(caseCount,_caseType,_caseTitle,_caseDescribtion, _caseLocation,_casePrice,msg.sender,false);
 
         //emit the event
-        emit CaseCreated(caseCount,_caseType,_caseTitle,_caseDescribtion,_casePrice,msg.sender,false);
+        emit CaseCreated(caseCount,_caseType,_caseTitle,_caseDescribtion, _caseLocation,_casePrice,msg.sender,false);
 
     }
 
@@ -93,7 +101,7 @@ contract Marketplace {
         _seller.transfer(msg.value);
 
         //trigger purchase event
-        emit CasePurchased(caseCount,_case.caseType,_case.caseTitle,_case.caseDescribtion,_case.casePrice,msg.sender,true);
+        emit CasePurchased(caseCount,_case.caseType,_case.caseTitle,_case.caseDescribtion,_case.caseLocation,_case.casePrice,msg.sender,true);
 
     }
 

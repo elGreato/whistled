@@ -31,8 +31,7 @@ contract("Marketplace", accounts => { //accounts are injected by Ganache, it's a
   });
 
 
-  //        >> Cases Creation<<
-
+  //    >> Cases Creation<<
   describe("cases", async () => {
     let result, caseCount;
 
@@ -41,6 +40,7 @@ contract("Marketplace", accounts => { //accounts are injected by Ganache, it's a
         "money Laundary",
         2,
         "money laundary in Zurich",
+        "Zurich",
          web3.utils.toWei("1", "Ether"),
          {from: seller}//from means the one who calls this function is the "seller"
          
@@ -56,20 +56,13 @@ contract("Marketplace", accounts => { //accounts are injected by Ganache, it's a
 
       assert.equal(event.caseId.toNumber(),caseCount.toNumber(), "id is correct");
       assert.equal(event.caseTitle, "money Laundary", " Title is correct");
+      assert.equal(event.caseLocation, "Zurich", "location is correct");
       assert.equal(event.casePrice, "1000000000000000000", "price is correct");
       assert.equal(event.owner, seller, " sender is correct");
       assert.equal(event.isPurchased, false, "purchase is correct");
-
-      //Failure
-      //Case must have a title
-       //await marketplace.createCase('',0,"some describtion", web3.utils.toWei('1', 'Ether'), {from: seller}).should.be.rejected;
-
-      // //case must have a price
-      // await marketplace.createCase('scandal', 0,"some describtion",web3.utils.toWei('0', 'Ether') ,{from: seller}).should.be.rejected;
     });
 
-    //     >>Cases Listing<<
-
+    //  >>Cases Listing<<
     it('Lists cases', async()=>{  //case is a reserved word in solidity use instance
 
       const instance = await marketplace.cases(caseCount);
@@ -81,7 +74,7 @@ contract("Marketplace", accounts => { //accounts are injected by Ganache, it's a
       assert.equal(instance.isPurchased, false, 'purchase is correct')
       
   });
-
+  //    >>Cases Selling<<
   it('sells cases', async()=>{
 
     //track balance of seller (just for testing the receive fund)
@@ -111,7 +104,7 @@ contract("Marketplace", accounts => { //accounts are injected by Ganache, it's a
     let price = web3.utils.toWei('1', 'Ether')
     price = new web3.utils.BN(price)
 
-    console.log("oldSellerBalance",oldSellerBalance,"newSellerBalance", newSellerBalance,"price" ,price)
+    //console.log("oldSellerBalance",oldSellerBalance,"newSellerBalance", newSellerBalance,"price" ,price)
 
     const expectedBalance = oldSellerBalance.add(price)
 
