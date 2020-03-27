@@ -8,6 +8,7 @@ module.exports = {
     development: {
       host: "127.0.0.1",
       port: 7545,
+      gas: 4612388, // Gas limit used for deploys
       network_id: "*" // Match any network id
     },
     myNetwork: {
