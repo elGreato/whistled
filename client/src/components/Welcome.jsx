@@ -3,10 +3,12 @@ import img_whis from "../assets/whistleImg.jpg";
 import "./Welcome.css";
 
 class Welcome extends Component {
-  state = {};
+ 
   render() {
     return (
+    
       <div className="container-fluid d-flex justify-content-center">
+   
         <div className="row">
           <div className="card text-center">
             <div className="overflow">

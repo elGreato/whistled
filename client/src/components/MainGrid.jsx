@@ -6,7 +6,7 @@ import { GridCard } from "./DashboardGridStyles";
 import { layouts, breakpoints, cols } from "./gridLayout";
 
 class MainGrid extends Component {
-  state = {};
+
   render() {
     const ResponsiveGridLayout = WidthProvider(Responsive);
 

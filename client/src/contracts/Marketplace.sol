@@ -11,7 +11,7 @@ contract Marketplace {
     mapping(uint256 => Case) public cases;
 
     //enum of case Types
-    enum CaseType {Bribery, Extortion, MoneyLaundry}
+    enum CaseType {BRIBERY, MONEYLAUNDERY, OTHER}
 
     constructor() public {
         contractName = "Whistled Market";
@@ -50,8 +50,9 @@ contract Marketplace {
         bool isPurchased
     );
 
-    function createCase(string memory _caseTitle,
+    function createCase(
         CaseType _caseType,
+        string memory _caseTitle,
         string memory _caseDescribtion,
          string memory _caseLocation,
          uint256 _casePrice
@@ -59,13 +60,15 @@ contract Marketplace {
         //requires valid name and price
         require(bytes(_caseTitle).length > 0, "Case Title is not valid!");
         require(_casePrice > 0, "Case price is not valid!");
-
+        //convert the price
+        uint256 adaptedPrice;
+       adaptedPrice = _casePrice*1e18;
         caseCount++;
         //create the case
-        cases[caseCount] = Case(caseCount,_caseType,_caseTitle,_caseDescribtion, _caseLocation,_casePrice,msg.sender,false);
+        cases[caseCount] = Case(caseCount,_caseType,_caseTitle,_caseDescribtion, _caseLocation,adaptedPrice,msg.sender,false);
 
         //emit the event
-        emit CaseCreated(caseCount,_caseType,_caseTitle,_caseDescribtion, _caseLocation,_casePrice,msg.sender,false);
+        emit CaseCreated(caseCount,_caseType,_caseTitle,_caseDescribtion, _caseLocation,adaptedPrice,msg.sender,false);
 
     }
 

@@ -34,14 +34,15 @@ contract("Marketplace", accounts => { //accounts are injected by Ganache, it's a
   //    >> Cases Creation<<
   describe("cases", async () => {
     let result, caseCount;
-
+    let  type  = 0;
     before(async () => {
+      
       result = await marketplace.createCase(
+        type,
         "money Laundary",
-        2,
         "money laundary in Zurich",
         "Zurich",
-         web3.utils.toWei("1", "Ether"),
+         1,
          {from: seller}//from means the one who calls this function is the "seller"
          
          ); 
