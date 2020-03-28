@@ -10,7 +10,24 @@ import NewCase from "./components/NewCase";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 class App extends Component {
-  state = { web3: null, accounts: null, contract: null };
+  
+
+  constructor(props){
+    super(props);
+    this.state = {
+      web3: null,
+      accounts: null,
+      contract: null,
+      loading: false,
+      cases: [],
+      caseCount: 0
+    };
+
+    //bind all function here
+
+    this.createCase = this.createCase.bind(this)
+
+  }
 
   componentDidMount = async () => {
     try {
@@ -27,6 +44,8 @@ class App extends Component {
         MarketplaceContract.abi,
         deployedNetwork && deployedNetwork.address
       );
+      const count = await instance.methods.caseCount().call();
+      this.setState ({caseCount: count}) 
 
       // Set web3, accounts, and contract to the state, and then proceed with an
       // example of interacting with the contract's methods.
@@ -38,20 +57,27 @@ class App extends Component {
       );
       console.error(error);
     }
+
+  };
+  createCase(_caseType, _caseTitle,_caseDescribtion,_caseLocation,_casePrice) {
+    //we have to tell react everytime that we are loading to change its state
+    this.setState({ loading: true });
+    
+    this.state.contract.methods
+      .createCase(
+        _caseType,
+        _caseTitle,
+        _caseDescribtion,
+        _caseLocation,
+        _casePrice   
+        )
+      .send({ from: this.state.accounts[0] })
+      .once("receipt", receipt => {
+        this.setState({ loading: false });
+      });
   };
 
-  // runExample = async () => {
-  //   const { accounts, contract } = this.state;
 
-  //   // Stores a given value, 5 by default.
-  //   await contract.methods.set(5).send({ from: accounts[0] });
-
-  //   // Get the value from the contract to prove it worked.
-  //   const response = await contract.methods.get().call();
-
-  //   // Update state with the result.
-  //   this.setState({ storageValue: response });
-  // };
 
   render() {
     if (!this.state.web3) {
@@ -63,9 +89,30 @@ class App extends Component {
 
         <Router>
           <Switch>
-            <Route exact path="/" component={Welcome} />
-            <Route path="/mart" component={Mart} />
-            <Route path="/newcase" component={NewCase} />
+            <Route
+              exact
+              path="/"
+              render={() => <Welcome loading={this.loading} />}
+            />
+            <Route
+              path="/mart"
+              render={props => (
+                <Mart
+                  caseCount={this.state.caseCount}
+               
+                  loading={this.state.loading}
+                  {...props}
+                />
+              )}
+            />
+            <Route path="/newcase" render={props => (
+                <NewCase
+                  caseCount={this.state.caseCount}
+                  createCase={this.createCase}
+                  loading={this.state.loading}
+                  {...props}
+                />
+              )} />
           </Switch>
         </Router>
       </div>
