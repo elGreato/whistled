@@ -45,7 +45,16 @@ class App extends Component {
         deployedNetwork && deployedNetwork.address
       );
       const count = await instance.methods.caseCount().call();
-      this.setState ({caseCount: count}) 
+      this.setState ({caseCount: count}); 
+
+      //Load the cases
+      for(var i=1; i<=this.state.caseCount; i++){
+        const kase = await instance.methods.cases(i).call();
+        this.setState({
+          cases: [...this.state.cases, kase]
+        })
+      }
+      console.log("all cases", this.state.cases)
 
       // Set web3, accounts, and contract to the state, and then proceed with an
       // example of interacting with the contract's methods.
@@ -99,7 +108,7 @@ class App extends Component {
               render={props => (
                 <Mart
                   caseCount={this.state.caseCount}
-               
+                  cases={this.state.cases}
                   loading={this.state.loading}
                   {...props}
                 />
