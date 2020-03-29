@@ -26,6 +26,7 @@ class App extends Component {
     //bind all function here
 
     this.createCase = this.createCase.bind(this)
+    this.purchaseCase = this.purchaseCase.bind(this)
 
   }
 
@@ -54,7 +55,7 @@ class App extends Component {
           cases: [...this.state.cases, kase]
         })
       }
-      console.log("all cases", this.state.cases)
+     
 
       // Set web3, accounts, and contract to the state, and then proceed with an
       // example of interacting with the contract's methods.
@@ -86,6 +87,16 @@ class App extends Component {
       });
   };
 
+  purchaseCase(_caseId, _casePrice){
+    this.setState({ loading: true });
+    console.log("id we receive", _caseId)
+    this.state.contract.methods
+      .purchaseCase(_caseId)
+      .send({ from: this.state.accounts[0], value: _casePrice })
+      .once("receipt", receipt => {
+        this.setState({ loading: false });
+      });
+  };
 
 
   render() {
@@ -109,6 +120,7 @@ class App extends Component {
                 <Mart
                   caseCount={this.state.caseCount}
                   cases={this.state.cases}
+                  purchaseCase={this.purchaseCase}
                   loading={this.state.loading}
                   {...props}
                 />
@@ -118,6 +130,7 @@ class App extends Component {
                 <NewCase
                   caseCount={this.state.caseCount}
                   createCase={this.createCase}
+                  
                   loading={this.state.loading}
                   {...props}
                 />

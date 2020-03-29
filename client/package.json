@@ -12,6 +12,7 @@
     "react-grid-layout": "^0.17.1",
     "react-router-dom": "^5.1.2",
     "react-scripts": "^3.4.0",
+    "truffle": "^5.1.19",
     "web3": "^1.2.6"
   },
   "scripts": {
