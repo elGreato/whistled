@@ -1,4 +1,6 @@
 const path = require("path");
+var PrivateKeyProvider = require("truffle-privatekey-provider");
+var privateKey = "e3f1cec76a5037c8bae3ebf3f080867b1b99cd40980fb7ca40374c5ae08114ce";
 
 module.exports = {
   // See <http://truffleframework.com/docs/advanced/configuration>
