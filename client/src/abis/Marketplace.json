@@ -7171,10 +7171,146 @@
       "links": {},
       "address": "0xaDC270c7D3B3B094dC5284C1A51818b7d65EF4A4",
       "transactionHash": "0xc7afd9cd0eceb06ccf2f72df43e2d5855727685b95a61c281170be6a7f036e74"
+    },
+    "3": {
+      "events": {
+        "0xa9ed8d2a67698bbe4adabd9c97481b325e91f49d54b0e7186ff5c42d2b9c0177": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "caseId",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "internalType": "string",
+              "name": "cast",
+              "type": "string"
+            }
+          ],
+          "name": "CaseCreated",
+          "type": "event"
+        },
+        "0x8008e1f1f1ad6155b88adac0bd082ce5afa17e3263f6192a2be36de242339a2b": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "caseId",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "internalType": "enum Marketplace.CaseType",
+              "name": "caseType",
+              "type": "uint8"
+            },
+            {
+              "indexed": false,
+              "internalType": "string",
+              "name": "caseTitle",
+              "type": "string"
+            },
+            {
+              "indexed": false,
+              "internalType": "string",
+              "name": "caseDescribtion",
+              "type": "string"
+            },
+            {
+              "indexed": false,
+              "internalType": "string",
+              "name": "caseLocation",
+              "type": "string"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "casePrice",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "internalType": "address payable",
+              "name": "owner",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "bool",
+              "name": "isPurchased",
+              "type": "bool"
+            }
+          ],
+          "name": "CaseCreated",
+          "type": "event"
+        },
+        "0xe8dbc45a2a76508517a761af4cb5e5c00b9b0f0bf31ab0e56c6f6d7ecbad088e": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "caseId",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "internalType": "enum Marketplace.CaseType",
+              "name": "caseType",
+              "type": "uint8"
+            },
+            {
+              "indexed": false,
+              "internalType": "string",
+              "name": "caseTitle",
+              "type": "string"
+            },
+            {
+              "indexed": false,
+              "internalType": "string",
+              "name": "caseDescribtion",
+              "type": "string"
+            },
+            {
+              "indexed": false,
+              "internalType": "string",
+              "name": "caseLocation",
+              "type": "string"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "casePrice",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "internalType": "address payable",
+              "name": "owner",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "bool",
+              "name": "isPurchased",
+              "type": "bool"
+            }
+          ],
+          "name": "CasePurchased",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0x47e0a6560C17098e8BC5D3FEE76b4963688951a7",
+      "transactionHash": "0x269802424906111581a5e6bac7cb56c5c42b3ccc639795cc2fe0ff43e5f44600"
     }
   },
   "schemaVersion": "3.0.23",
-  "updatedAt": "2020-04-02T14:07:29.691Z",
+  "updatedAt": "2020-04-02T18:31:00.277Z",
   "devdoc": {
     "methods": {}
   },

@@ -1,7 +1,4 @@
 const path = require('path')
-var HDWalletProvider = require('@truffle/hdwallet-provider')
-var mnemonic =
-  'vast height recycle satoshi master borrow suit text affair piece swarm fury'
 
 module.exports = {
   // See <http://truffleframework.com/docs/advanced/configuration>
@@ -14,23 +11,11 @@ module.exports = {
       gas: 4612388, // Gas limit used for deploys
       network_id: '*', // Match any network id
     },
-    myNetwork: {
-      host: '127.0.0.1',
-      port: 7545,
-      network_id: 5777,
-    },
-    ropsten: {
-      provider: () =>
-        new HDWalletProvider(
-          mnemonic,
-          'https://ropsten.infura.io/v3/a42e4fb296704c3f9ab9442c8f26f2dc',
-          0,
-          1,
-          true,
-          "m/44'/1'/0'/0/",
-        ),
 
+    "live": {
       network_id: 3,
+      host: 'https://elgreato.com/whistled',
+      port: 7545,
     },
     rinkeby: {
       host: 'localhost', // Connect to geth on the specified
