@@ -9,7 +9,7 @@ using a blockchain browswer, go to .
 ```bash
 whistleblowing.crypto
 ```
-
+Updated to truffle teams
 ## Usage
 
 Contact Ali Habbabeh
