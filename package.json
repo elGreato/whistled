@@ -1,6 +1,6 @@
 {
   "name": "whistled",
-  "homepage": "https://elgreato.com/whistled",
+  "homepage": "https://whistled.herokuapp.com/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
