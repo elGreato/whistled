@@ -1,26 +1,65 @@
-import React, { Component } from "react";
+import React, { Component } from 'react'
+import AES from 'crypto-js/aes'
+import cryptoJs from 'crypto-js'
+
+
+
+const ipfsClient = require('ipfs-http-client')
+const ipfs = ipfsClient({
+  host: 'ipfs.infura.io',
+  port: 5001,
+  protocol: 'https',
+})
 
 class NewCase extends Component {
   constructor(props) {
-    super(props);
-    this.state = { selectedOption: 0 };
+    super(props)
+    this.state = { selectedOption: 0, buffer: null }
 
     this.handleOptionChange = this.handleOptionChange.bind(this)
+    this.handleFileChange = this.handleFileChange.bind(this)
   }
   handleOptionChange = changeEvent => {
-    console.log("selected >>", this.state.selectedOption)
     this.setState({
-      selectedOption: changeEvent.target.value
-    });
-    console.log("after >>", this.state.selectedOption)
-  };
+      selectedOption: changeEvent.target.value,
+    })
+  }
+
+  handleFileChange = event => {
+    
+    console.log('file captured')
+    event.preventDefault()
+    //fetch the file
+    const file = event.target.files[0]
+
+    //reader converts file to a buffer
+    const reader = new window.FileReader()
+    reader.readAsArrayBuffer(file)
+    reader.onloadend = () => {
+      this.setState({ buffer: Buffer(reader.result) })
+    }
+  }
+  encrypter = (input)=>{
+
+
+    var encryptedInput = AES.encrypt(input, "a").toString();
+
+    var decryptedInput = AES.decrypt(encryptedInput, "a");
+
+    var originalInput = decryptedInput.toString(cryptoJs.enc.Utf8)
+
+    return encryptedInput + ">>>"+ originalInput
+  }
   render() {
     return (
-      <div style={{ marginTop: "6em" }}>
+      
+      <div style={{ marginTop: '6em' }}>
         <div class="container-fluid">
+          {this.encrypter("h")}
+          
           <div class="row">
             <div class="col-md-12">
-              <h3>Open a new case:</h3>
+          <h3>Open a new case:</h3>
               <h5>
                 Warning: if you wish to remain anonymous, do not enter any
                 personal information - such as your name or your relationship
@@ -29,19 +68,34 @@ class NewCase extends Component {
               </h5>
               <br />
 
-
               <form
                 role="form"
                 onSubmit={event => {
-                  event.preventDefault();
-                  console.log(event)
-                  const caseType = this.state.selectedOption;
-                  const caseTitle = this.caseTitle.value;
-                  const caseLocation = this.caseLocation.value;
+                  event.preventDefault()
+
+                  //Submit file to IPFS
+                  //view file fia https://ipfs.infura.io/ipfs/HASH
+                  ipfs.add(this.state.buffer, (err, res) => {
+                    console.log('Ipfs result', res) //Result should be a hash e.g. QmVpeceu7JCWLBskJgudkdQ8XnM2ExMZRorsv6sQchACjW
+                    if (err) {
+                      console.error(err)
+                      return
+                    }
+                  })
+
+                  const caseType = this.state.selectedOption
+                  const caseTitle = this.caseTitle.value
+                  const caseLocation = this.caseLocation.value
                   //const casePrice = window.web3.utils.toWei(this.casePrice.value.toString(),"Ether");
-                  const casePrice = this.casePrice.value;
-                  const caseDescribtion = this.caseDescribtion.value;
-                  this.props.createCase(caseType,caseTitle,caseDescribtion,caseLocation,casePrice);
+                  const casePrice = this.casePrice.value
+                  const caseDescribtion = this.caseDescribtion.value
+                  this.props.createCase(
+                    caseType,
+                    caseTitle,
+                    caseDescribtion,
+                    caseLocation,
+                    casePrice,
+                  )
                 }}
               >
                 {/*Case Title*/}
@@ -50,7 +104,7 @@ class NewCase extends Component {
                   <input
                     type="text"
                     ref={input => {
-                      this.caseTitle = input;
+                      this.caseTitle = input
                     }}
                     class="form-control"
                     id="caseTitle"
@@ -58,13 +112,13 @@ class NewCase extends Component {
                   />
                 </div>
 
-                 {/*Case Location*/}
-                 <div class="form-group">
+                {/*Case Location*/}
+                <div class="form-group">
                   <legend for="caseLocation">Case Location</legend>
                   <input
                     type="text"
                     ref={input => {
-                      this.caseLocation = input;
+                      this.caseLocation = input
                     }}
                     class="form-control"
                     id="caseLocation"
@@ -77,7 +131,7 @@ class NewCase extends Component {
                 <div class="form-check form-check-inline">
                   <input
                     class="form-check-input"
-                   /*  checked={this.state.selectedOption===0 ? true : false} */
+                    /*  checked={this.state.selectedOption===0 ? true : false} */
                     type="radio"
                     name="inlineRadioOptions"
                     id="caseType1"
@@ -91,7 +145,7 @@ class NewCase extends Component {
                   <input
                     class="form-check-input"
                     type="radio"
-                   /*  checked={this.state.selectedOption===1 ? true : false} */
+                    /*  checked={this.state.selectedOption===1 ? true : false} */
                     name="inlineRadioOptions"
                     id="caseType2"
                     value="1"
@@ -119,7 +173,7 @@ class NewCase extends Component {
                   <textarea
                     type="text"
                     ref={input => {
-                      this.caseDescribtion = input;
+                      this.caseDescribtion = input
                     }}
                     class="form-control"
                     id="caseDescribtion"
@@ -134,7 +188,7 @@ class NewCase extends Component {
                     type="text"
                     class="form-control"
                     ref={input => {
-                      this.casePrice = input;
+                      this.casePrice = input
                     }}
                     id="casePrice"
                     required
@@ -143,11 +197,12 @@ class NewCase extends Component {
 
                 {/*Case Files*/}
                 <div class="form-group">
-                  <label for="exampleInputFile">File input</label>
+                  <label for="caseFile">File input</label>
                   <input
                     type="file"
+                    onChange={this.handleFileChange}
                     class="form-control-file"
-                    id="exampleInputFile"
+                    id="caseFile"
                   />
                   {/* <p class="help-block">Example block-level help text here.</p> */}
                 </div>
@@ -164,8 +219,8 @@ class NewCase extends Component {
           </div>
         </div>
       </div>
-    );
+    )
   }
 }
 
-export default NewCase;
+export default NewCase
