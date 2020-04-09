@@ -42,7 +42,8 @@ contract("Marketplace", accounts => { //accounts are injected by Ganache, it's a
         "money Laundary",
         "money laundary in Zurich",
         "Zurich",
-         1,
+         "1000000000000000000",
+         "Placeholder for a Link to IPFS ",
          {from: seller}//from means the one who calls this function is the "seller"
          
          ); 
@@ -61,6 +62,7 @@ contract("Marketplace", accounts => { //accounts are injected by Ganache, it's a
       assert.equal(event.casePrice, "1000000000000000000", "price is correct");
       assert.equal(event.owner, seller, " sender is correct");
       assert.equal(event.isPurchased, false, "purchase is correct");
+      //assert.equal(event.caseDocs, "Placeholder for a Link to IPFS ","Case Docs link is correct");
     });
 
     //  >>Cases Listing<<
@@ -73,6 +75,7 @@ contract("Marketplace", accounts => { //accounts are injected by Ganache, it's a
       assert.equal(instance.casePrice,'1000000000000000000' , 'price is correct')
       assert.equal(instance.owner, seller, ' sender is correct')
       assert.equal(instance.isPurchased, false, 'purchase is correct')
+      assert.equal(instance.caseDocs, "Placeholder for a Link to IPFS ","Case Docs link is correct");
       
   });
   //    >>Cases Selling<<
@@ -110,6 +113,7 @@ contract("Marketplace", accounts => { //accounts are injected by Ganache, it's a
     const expectedBalance = oldSellerBalance.add(price)
 
     assert.equal(newSellerBalance.toString(), expectedBalance.toString());
+
 
     //Failure: tries to buy a product that doesn't exist - no valid id >>>these need chai
     // await marketplace.purchaseCase(99,{ from: buyer, value: web3.utils.toWei('1', 'Ether')}).should.be.rejected;

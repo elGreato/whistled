@@ -25,6 +25,6 @@ module.exports = {
       gas: 4612388, // Gas limit used for deploys
     },
   },
-  contracts_directory: './client/src/contracts/',
-  contracts_build_directory: './client/src/abis/',
+  contracts_directory: './src/contracts/',
+  contracts_build_directory: './src/abis/',
 }

@@ -2,8 +2,6 @@ import React, { Component } from 'react'
 import AES from 'crypto-js/aes'
 import cryptoJs from 'crypto-js'
 
-
-
 const ipfsClient = require('ipfs-http-client')
 const ipfs = ipfsClient({
   host: 'ipfs.infura.io',
@@ -19,19 +17,15 @@ class NewCase extends Component {
     this.handleOptionChange = this.handleOptionChange.bind(this)
     this.handleFileChange = this.handleFileChange.bind(this)
   }
+
   handleOptionChange = changeEvent => {
-    this.setState({
-      selectedOption: changeEvent.target.value,
-    })
+    this.setState({ selectedOption: changeEvent.target.value })
   }
 
   handleFileChange = event => {
-    
-    console.log('file captured')
     event.preventDefault()
     //fetch the file
     const file = event.target.files[0]
-
     //reader converts file to a buffer
     const reader = new window.FileReader()
     reader.readAsArrayBuffer(file)
@@ -39,27 +33,22 @@ class NewCase extends Component {
       this.setState({ buffer: Buffer(reader.result) })
     }
   }
-  encrypter = (input)=>{
 
-
-    var encryptedInput = AES.encrypt(input, "a").toString();
-
-    var decryptedInput = AES.decrypt(encryptedInput, "a");
-
+  encrypter = input => {
+    var encryptedInput = AES.encrypt(input, 'a').toString()
+    var decryptedInput = AES.decrypt(encryptedInput, 'a')
     var originalInput = decryptedInput.toString(cryptoJs.enc.Utf8)
-
-    return encryptedInput + ">>>"+ originalInput
+    return encryptedInput + '>>>' + originalInput
   }
   render() {
     return (
-      
       <div style={{ marginTop: '6em' }}>
         <div class="container-fluid">
-          {this.encrypter("h")}
-          
+          {this.encrypter('h')}
+
           <div class="row">
             <div class="col-md-12">
-          <h3>Open a new case:</h3>
+              <h3>Open a new case:</h3>
               <h5>
                 Warning: if you wish to remain anonymous, do not enter any
                 personal information - such as your name or your relationship
@@ -72,9 +61,8 @@ class NewCase extends Component {
                 role="form"
                 onSubmit={event => {
                   event.preventDefault()
-
                   //Submit file to IPFS
-                  //view file fia https://ipfs.infura.io/ipfs/HASH
+                  //view file fia https://ipfs.infura.io/ipfs/$HASH
                   ipfs.add(this.state.buffer, (err, res) => {
                     console.log('Ipfs result', res) //Result should be a hash e.g. QmVpeceu7JCWLBskJgudkdQ8XnM2ExMZRorsv6sQchACjW
                     if (err) {

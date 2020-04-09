@@ -1,4 +1,4 @@
-pragma solidity >=0.4.21 <0.6.2;
+pragma solidity >=0.4.21;
 
 contract Marketplace {
     //state var
@@ -24,6 +24,7 @@ contract Marketplace {
         string caseDescribtion;
         string caseLocation;
         uint256 casePrice;
+        string caseDocs; //link to IPFS
         address payable owner;
         bool isPurchased;
     }
@@ -35,6 +36,7 @@ contract Marketplace {
         string caseDescribtion,
         string caseLocation,
         uint256 casePrice,
+        string caseDocs,
         address payable owner,
         bool isPurchased
     );
@@ -46,6 +48,7 @@ contract Marketplace {
         string caseDescribtion,
         string caseLocation,
         uint256 casePrice,
+        string caseDocs,
         address payable owner,
         bool isPurchased
     );
@@ -54,21 +57,22 @@ contract Marketplace {
         CaseType _caseType,
         string memory _caseTitle,
         string memory _caseDescribtion,
-         string memory _caseLocation,
-         uint256 _casePrice
+        string memory _caseLocation,
+        uint256 _casePrice,
+        string memory _caseDocs
          ) public {
         //requires valid name and price
         require(bytes(_caseTitle).length > 0, "Case Title is not valid!");
         require(_casePrice > 0, "Case price is not valid!");
-        //convert the price
-        uint256 adaptedPrice;
-       adaptedPrice = _casePrice*1e18;
+         //convert the price
+        /*uint256 adaptedPrice;
+       adaptedPrice = _casePrice*1e18; */
         caseCount++;
         //create the case
-        cases[caseCount] = Case(caseCount,_caseType,_caseTitle,_caseDescribtion, _caseLocation,adaptedPrice,msg.sender,false);
+        cases[caseCount] = Case(caseCount,_caseType,_caseTitle,_caseDescribtion, _caseLocation,_casePrice,_caseDocs,msg.sender,false);
 
         //emit the event
-        emit CaseCreated(caseCount,_caseType,_caseTitle,_caseDescribtion, _caseLocation,adaptedPrice,msg.sender,false);
+        emit CaseCreated(caseCount,_caseType,_caseTitle,_caseDescribtion, _caseLocation,_casePrice,"Link locatio is hidden",msg.sender,false);
 
     }
 
@@ -104,7 +108,17 @@ contract Marketplace {
         _seller.transfer(msg.value);
 
         //trigger purchase event
-        emit CasePurchased(caseCount,_case.caseType,_case.caseTitle,_case.caseDescribtion,_case.caseLocation,_case.casePrice,msg.sender,true);
+        emit CasePurchased(caseCount,_case.caseType,_case.caseTitle,_case.caseDescribtion,
+        _case.caseLocation,_case.casePrice,"link location is hidden",msg.sender,true);
+
+    }
+
+    function getCaseDocs(uint256 _caseId)public view returns (string memory){
+        if(cases[_caseId].owner == msg.sender && cases[_caseId].isPurchased)
+
+        return cases[_caseId].caseDocs;
+
+        else return "You don't own this case";
 
     }
 
