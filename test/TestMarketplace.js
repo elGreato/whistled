@@ -44,6 +44,7 @@ contract("Marketplace", accounts => { //accounts are injected by Ganache, it's a
         "Zurich",
          "1000000000000000000",
          "Placeholder for a Link to IPFS ",
+         "Placeholder for a case Decyrption Key",
          {from: seller}//from means the one who calls this function is the "seller"
          
          ); 
@@ -76,6 +77,9 @@ contract("Marketplace", accounts => { //accounts are injected by Ganache, it's a
       assert.equal(instance.owner, seller, ' sender is correct')
       assert.equal(instance.isPurchased, false, 'purchase is correct')
       assert.equal(instance.caseDocs, "Placeholder for a Link to IPFS ","Case Docs link is correct");
+      assert.equal(instance.caseDecKey, "Placeholder for a case Decyrption Key","Case Decryption Key link is correct");
+
+      
       
   });
   //    >>Cases Selling<<

@@ -69,7 +69,7 @@ class App extends Component {
     }
 
   };
-  createCase(_caseType, _caseTitle,_caseDescribtion,_caseLocation,_casePrice) {
+  createCase(_caseType, _caseTitle,_caseDescribtion,_caseLocation,_casePrice,_caseDocs,_caseDecKey) {
     //we have to tell react everytime that we are loading to change its state
     this.setState({ loading: true });
     
@@ -79,7 +79,9 @@ class App extends Component {
         _caseTitle,
         _caseDescribtion,
         _caseLocation,
-        _casePrice   
+        _casePrice,
+        _caseDocs,
+        _caseDecKey   
         )
       .send({ from: this.state.accounts[0] })
       .once("receipt", receipt => {
