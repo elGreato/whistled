@@ -3,11 +3,13 @@ import MarketplaceContract from "./abis/Marketplace.json";
 import getWeb3 from "./utils/getWeb3";
 import NavBar from "./components/NavBar";
 import "./App.css";
-
+import ChatRoom from './components/ChatRoom'
 import Welcome from "./components/Welcome";
 import Mart from "./components/Mart";
 import NewCase from "./components/NewCase";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import history from "./components/history"
+import { withRouter ,BrowserRouter as Router, Switch, Route, useLocation } from "react-router-dom";
+
 
 class App extends Component {
   
@@ -27,6 +29,7 @@ class App extends Component {
 
     this.createCase = this.createCase.bind(this)
     this.purchaseCase = this.purchaseCase.bind(this)
+    this.getCaseDocs = this.getCaseDocs.bind(this)
 
   }
 
@@ -100,6 +103,19 @@ class App extends Component {
       });
   };
 
+  getCaseDocs(_caseId){
+    let res;
+    this.setState({ loading: true });
+    console.log("id of case receive", _caseId)
+    return  res = this.state.contract.methods
+      .getCaseDocs(_caseId)
+      .send({ from: this.state.accounts[0] })
+      .once("case Link given", receipt => {
+        this.setState({ loading: false });
+      }); 
+
+  };
+
 
   render() {
     if (!this.state.web3) {
@@ -107,10 +123,12 @@ class App extends Component {
     }
     return (
       <div className="App">
-        <NavBar account={this.state.accounts[0]} />
+      
+        <NavBar location={this.props.location} account={this.state.accounts[0]} />
 
-        <Router>
+        <Router history={history}>
           <Switch>
+            <div className="App">
             <Route
               exact
               path="/"
@@ -120,16 +138,20 @@ class App extends Component {
               path="/mart"
               render={props => (
                 <Mart
+                history={history}
                   caseCount={this.state.caseCount}
                   cases={this.state.cases}
                   purchaseCase={this.purchaseCase}
+                  getCaseDocs={this.getCaseDocs}
                   loading={this.state.loading}
                   {...props}
                 />
               )}
             />
             <Route path="/newcase" render={props => (
+              
                 <NewCase
+                history={history}
                   caseCount={this.state.caseCount}
                   createCase={this.createCase}
                   
@@ -137,11 +159,24 @@ class App extends Component {
                   {...props}
                 />
               )} />
+
+              <Route path="/chat/:id" render={props => (
+                
+                <ChatRoom
+                history={history}
+                selKase ={this.state.cases[(this.props.location.pathname).substring(6)]}
+                {...props} //this was painful to find
+                />
+              )} />
+                {console.log ("hello from router")}
+                {console.log ("hello from historu router", history)}
+              </div>
           </Switch>
+          
         </Router>
       </div>
     );
   }
 }
 
-export default App;
+export default withRouter(App);

@@ -1,6 +1,8 @@
+import Container from 'react-bootstrap/Container'
 import React, { Component } from 'react'
 import { request } from 'https'
 import axios from 'axios'
+
 const crypto = require('crypto')
 const algorithm = 'aes-256-ctr'
 const ipfsClient = require('ipfs-http-client')
@@ -28,17 +30,7 @@ class NewCase extends Component {
     this.setState({ selectedOption: changeEvent.target.value })
   }
 
-  handleTemp = e => {
-    e.preventDefault()
-    ipfs.get('Qmb8dunuNT5bVr5yZ2GJkWQ2VABrN9xPUsyVpX8kwEX8aA', (err, res) => {
-      console.log('Ipfs from', this.decrypt(Buffer.from(res[0].content))) //Result should be a hash e.g. QmVpeceu7JCWLBskJgudkdQ8XnM2ExMZRorsv6sQchACjW
-
-      if (err) {
-        console.error(err)
-        return
-      }
-    })
-  }
+ 
 
   handleFileChange = event => {
     event.preventDefault()
@@ -85,7 +77,8 @@ class NewCase extends Component {
 
   render() {
     return (
-      <div style={{ marginTop: '6em' }}>
+      <div style={{ marginTop: '3em' }}>
+        <Container fluid="md">
         <div class="container-fluid">
           <div class="row">
             <div class="col-md-12">
@@ -118,7 +111,7 @@ class NewCase extends Component {
                   const encryptedBuffer = this.encrypt(this.state.buffer)
 
                   //Submit file to IPFS -- view file fia https://ipfs.infura.io/ipfs/$HASH
-                  var promises = new Promise((resolve, reject) => {
+                  var promise = new Promise((resolve, reject) => {
                     ipfs.add(encryptedBuffer, (err, res) => {
                       resolve(res) //Result should be a hash e.g. QmVpeceu7JCWLBskJgudkdQ8XnM2ExMZRorsv6sQchACjW
                       console.log('Ipfs result', res)
@@ -129,7 +122,7 @@ class NewCase extends Component {
                     })
                   })
 
-                  promises
+                  promise
                     .then(res => {
                       this.setState({ caseHash: res[0].path })
                       console.log('case hash', this.state.caseHash)
@@ -288,6 +281,7 @@ class NewCase extends Component {
             </div>
           </div>
         </div>
+        </Container>
       </div>
     )
   }
