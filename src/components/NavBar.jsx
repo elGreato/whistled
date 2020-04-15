@@ -1,51 +1,44 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import Nav from 'react-bootstrap/Nav'
+import Navbar from 'react-bootstrap/Navbar'
+
 class NavBar extends Component {
   render() {
     return (
-      <nav
-        className="navbar navbar-expand-md info-color navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow"
-        style={{ margin: "0" + "em" }}
+      <Navbar 
+      bg="dark"
+      variant="dark"
+      expand="lg"
       >
-        <a
-          className="navbar-brand col-sm-3 col-md-2 mr-0"
-          href=""
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Ali Tester
-        </a>
-        <ul className="navbar-nav px-3">
-          <li className="navitem text-nowrap d-none d-sm-none d-sm-block mr-right">
-            <small className="text-white">
-              <span id="account">
-                your account address:
-                {this.props.account}
-              </span>
-            </small>
-          </li>
-          <li className="navitem text-nowrap d-none d-sm-none d-sm-block">
-            <a
-              className="navbar-brand col-sm-3 col-md-2 mr-0"
-              href="/mart"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Mart
-            </a>
-          </li>
-          <li className="navitem text-nowrap d-none d-sm-none d-sm-block">
-            <a
-              className="navbar-brand col-sm-3 col-md-2 mr-0"
-              href="/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Home
-            </a>
-          </li>
-        </ul>
-      </nav>
+        <Navbar.Brand href="/">Whistled</Navbar.Brand>
+       
+      <Nav 
+       className="mr-auto"
+    variant="pills"
+      activeKey="/home"
+      //onSelect={(selectedKey) => alert(`selected ${selectedKey}`)}
+      >
+        <Nav.Item>
+    <Nav.Link href="/">Home</Nav.Link>
+  </Nav.Item>
+  <Nav.Item>
+    <Nav.Link href="/mart">Market</Nav.Link>
+  </Nav.Item>
+  <Nav.Item>
+    <Nav.Link href="./newCase">Submit a Case</Nav.Link>
+  </Nav.Item>
+  <Nav.Item>
+    <Nav.Link href="./chat">Chat</Nav.Link>
+  </Nav.Item>
+  </Nav>
+  <Nav>
+  <Nav.Item>
+    <h6 className="whited">
+      Your account is: {this.props.account}
+    </h6>
+  </Nav.Item>
+      </Nav>
+      </Navbar>
     );
   }
 }

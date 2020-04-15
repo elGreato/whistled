@@ -29,7 +29,7 @@ class MainGrid extends Component {
 
         {this.props.cases.map((kase, key) => {
           return (
-            <Card>
+            <Card key={key}>
               <Card.Body>
                 <Card.Title>{kase.caseTitle}</Card.Title>
                 <Card.Text>Describtion: {kase.caseDescribtion}</Card.Text>
@@ -94,10 +94,8 @@ class MainGrid extends Component {
                 <Button
                   variant="success"
                   style={{ margin: '1rem' }}
-                  href={'./chat/'+ kase.caseId}
-            /*       onClick={
-                    this.setState({selectedCase: kase.caseId})}
-                   /*  this.updateHistory(kase.caseId)} */
+                  href={`/chat/${kase.caseId}`}
+         
                 > 
                   Chat With Whistleblower "Secure"
                 </Button>
@@ -120,7 +118,7 @@ class MainGrid extends Component {
 
 export default MainGrid
 //style={{ width: "18rem" }}
-{
+
   /* <Card.Img variant="top" src="holder.js/100px160" />
   
    handleTemp = e => {
@@ -135,4 +133,4 @@ export default MainGrid
     })
   }
   */
-}
+

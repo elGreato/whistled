@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import Iframe from 'react-iframe'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import Row from 'react-bootstrap/Row'
@@ -7,29 +6,88 @@ import Col from 'react-bootstrap/Col'
 import Container from 'react-bootstrap/Container'
 import Table from 'react-bootstrap/Table'
 
+
 class ChatRoom extends Component {
   constructor(props) {
     super(props)
+    
 
-    this.state = {}
+    this.state = {
+      account: this.props.account,
+      chatContract: this.props.chatContract,
+      loading: false,
+      relationships: [],
+      members: []
+
+    }
+   
+
+    this.joinChat = this.joinChat.bind(this) //bind even if  you don't export
+    this.requestContact = this.requestContact.bind(this)
+  }
+
+
+   async joinChat(e){
+    e.preventDefault();
+
+     try{ 
+      console.log(this.state.chatContract)
+      this.setState({ loading: true })
+      this.state.chatContract.methods.join()
+      .send({from: this.state.account}).once("joined chat", rec=>{
+        this.setState({loading: false})
+      })
+      
+    
+     } 
+     catch (error) {
+      // Catch any errors for any of the above operations.
+      alert(
+        `Failed to load web3, relations, or contract. Check console for details.`,
+      )
+      console.error(error)
+    } 
+  }
+
+
+  
+  
+  async requestContact(e){
+    e.preventDefault();
+    console.log("members till now", await this.state.chatContract.methods.membersCount().call())
+
+  }
+
+ 
+  
+
+  sendMsg(e){
+    e.preventDefault();
+    
   }
 
   render() {
     return (
+      
       <div className="chatContainer">
+      
         <Container className="Container" fluid="md">
           <Form>
             {/* First Block */}
+            <Col>
             <Row className="r1">
               Chatting with Whistleblower of address: 
-              {/* {this.props.cases.map((kase, key) => {
-
-              })} */}
+             
               {this.props.selKase.owner}
-              
-              {console.log("id", this.props.match.params.id)}
-              {console.log("dad", this.props)}
+
+              <br/>owner of Case: {this.props.selKase.caseTitle}
+     
             </Row>
+            </Col>
+            <Col >
+            <Button onClick={this.joinChat}>Join Chat</Button>
+            <Button onClick={this.requestContact}>Request to Contact</Button>
+            </Col>
 
             <br />
             <Row>
@@ -37,6 +95,7 @@ class ChatRoom extends Component {
               <Col className="chatCol" xs={6}>
                 <Form.Control
                   as="textarea"
+                  id="chatWindow"
                   rows="9"
                   placeholder="chats go here"
                 />
@@ -60,10 +119,10 @@ class ChatRoom extends Component {
 
             <Row>
               <Col className="chatCol" xs={5}>
-                <Form.Control placeholder="write your message here" />
+                <Form.Control id="userMsg" placeholder="write your message here" />
               </Col>
               <Col xs={1}>
-                <Form.Control as="button">Send </Form.Control>
+                <Form.Control onClick={this.sendMsg}  as="button">Send </Form.Control>
               </Col>
             </Row>
           </Form>

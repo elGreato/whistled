@@ -22,8 +22,30 @@ body {
   padding-top: 6rem;
 }
 .Container{
-  padding-top: 6rem;
+  padding-top: 3rem;
   margin-top: 3rem;
+}
+.whited {
+  color: azure;
+  
+ 
+  align-content: flex-start;
+}
+.CardDeck{
+  width: 100%;
+  align-content: center;
+  vertical-align: 1rem;
+  padding: 3rem;
+}
+
+.welCard{
+  align-content: center;
+
+}
+
+
+.App{
+  align-content: center;
 }
 
 .r1{
