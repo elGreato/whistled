@@ -28,6 +28,7 @@ class App extends Component {
       loading: false,
       cases: [],
       caseCount: 0,
+      currentBlockNum: null,
     }
 
     //bind all function here
@@ -57,6 +58,12 @@ class App extends Component {
       const deployedNetwork2 = ChatContract.networks[networkId]
       const chatContract = new web3.eth.Contract(ChatContract.abi, deployedNetwork2 && deployedNetwork2.address)
       this.setState({ chatContract })
+
+      //get block number 
+      web3.eth.getBlockNumber().then(data => {
+        this.setState({ currentBlockNum: data })
+      });
+
 
 
       const count = await instance.methods.caseCount().call()
@@ -188,6 +195,7 @@ class App extends Component {
                   render={props => (
                     <ChatRoom
                       chatContract={this.state.chatContract}
+                      currentBlockNum={this.state.currentBlockNum}
                       account={this.state.accounts[0]}
                       selKase={this.state.cases[parseInt(props.match.params.id) - 1]}
                       {...props} //this was painful to find

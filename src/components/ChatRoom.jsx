@@ -10,41 +10,43 @@ import Table from 'react-bootstrap/Table'
 class ChatRoom extends Component {
   constructor(props) {
     super(props)
-    
-
+        
     this.state = {
       account: this.props.account,
       chatContract: this.props.chatContract,
       loading: false,
       relationships: [],
-      members: []
+      members: [],
+      requestingList: []
+     }
 
-    }
-   
+    console.log("chat cont", this.state.chatContract)
 
+    this.getRequestingContacts();
     this.joinChat = this.joinChat.bind(this) //bind even if  you don't export
     this.requestContact = this.requestContact.bind(this)
+    this.getRelation = this.getRelation.bind(this)
+    this.getRequestingContacts= this.getRequestingContacts.bind(this)
   }
 
 
    async joinChat(e){
+
     e.preventDefault();
 
-     try{ 
+    try{ 
+
       console.log(this.state.chatContract)
       this.setState({ loading: true })
-      this.state.chatContract.methods.join()
-      .send({from: this.state.account}).once("joined chat", rec=>{
-        this.setState({loading: false})
-      })
-      
+      let contractMethods = this.state.chatContract.methods;
+      contractMethods.join().send({from: this.state.account}).once("joined chat", rec=>{this.setState({loading: false})
+      })     
     
-     } 
-     catch (error) {
+    } 
+    catch (error) {
+
       // Catch any errors for any of the above operations.
-      alert(
-        `Failed to load web3, relations, or contract. Check console for details.`,
-      )
+      alert(`Failed to load web3, relations, or contract. Check console for details.`,)
       console.error(error)
     } 
   }
@@ -53,15 +55,66 @@ class ChatRoom extends Component {
   
   
   async requestContact(e){
+
     e.preventDefault();
-    console.log("members till now", await this.state.chatContract.methods.membersCount().call())
+    console.log("members till now", await this.state.chatContract.methods.membersCount().call());
+    let owner = this.props.selKase.owner;
+    let contractMethods = this.state.chatContract.methods;
+    contractMethods.addContact(owner).send({from: this.state.account}).once("Contact requested", rec=>{
+      this.setState({loading: false})
+    })
+    
 
   }
 
- 
-  
+  async getRelation(e){
 
-  sendMsg(e){
+    console.log("this account: ", this.state.account, "sending to ", this.props.selKase.owner)
+    let rez;
+    console.log("ger relation with start")
+    try{
+      rez = await this.state.chatContract.methods.getRelationWith(this.props.selKase.owner).call()
+    }
+    catch(er){
+      console.error(er)
+    }
+
+  console.log(rez)
+}
+
+  async getRequestingContacts (){
+
+    console.log("from chat room, current block", this.props.currentBlockNum)
+    
+
+
+    let invEvents = await this.state.chatContract.getPastEvents('addContactEvent', {
+    filter: {returnValues: [1]}, 
+    fromBlock: this.props.currentBlockNum -100,
+    toBlock: this.props.currentBlockNum
+    });
+    //load these contacts to state: 
+
+   /*  for (let i=0; i<invEvents.length; i++){
+      let kontact = invEvents[i].address;
+      console.log("each kontact", kontact)
+      this.setState({
+      requestList: [...this.state.requestingList, kontact]})
+    } */
+    let copy=[];
+    for (var kontact of invEvents){
+      console.log("k", kontact.returnValues)
+      copy.push(kontact.returnValues.requester)
+    }
+    this.setState({requestingList: copy})
+    console.log("ur requesting list", this.state.requestingList)
+
+    console.log("inv events", invEvents)
+
+
+}
+
+  async sendMsg(e){
     e.preventDefault();
     
   }
@@ -109,7 +162,7 @@ class ChatRoom extends Component {
                       <th>#</th>
                       <th>Sender Address</th>
                       <th>
-                        <Button >Chat</Button>
+                        <Button onClick={this.getRelation}>Chat</Button>
                       </th>
                     </tr>
                   </thead>

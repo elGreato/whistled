@@ -32,9 +32,10 @@ body {
   align-content: flex-start;
 }
 .CardDeck{
-  width: 100%;
-  align-content: center;
-  vertical-align: 1rem;
+
+  width: 33%;
+ float: inline-start;
+  
   padding: 3rem;
 }
 

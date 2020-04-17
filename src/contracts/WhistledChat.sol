@@ -82,12 +82,7 @@ contract WhistledChat {
         _;
     }
 
-    function getRelationWith(address a)
-        public
-        view
-        onlyMember
-        returns (RelationshipType)
-    {
+    function getRelationWith(address a) public view returns (RelationshipType) {
         return relationships[msg.sender][a];
     }
 }
