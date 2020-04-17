@@ -17,7 +17,10 @@ class ChatRoom extends Component {
       loading: false,
       relationships: [],
       members: [],
-      requestingList: []
+      requestingList: [],
+      msgToSend: "",
+      txtArea: []
+ 
      }
 
     console.log("chat cont", this.state.chatContract)
@@ -27,6 +30,12 @@ class ChatRoom extends Component {
     this.requestContact = this.requestContact.bind(this)
     this.getRelation = this.getRelation.bind(this)
     this.getRequestingContacts= this.getRequestingContacts.bind(this)
+    this.sendMsg= this.sendMsg.bind(this)
+    this.updateInput= this.updateInput.bind(this)
+  }
+
+  componentDidMount(){
+
   }
 
 
@@ -84,39 +93,64 @@ class ChatRoom extends Component {
 
   async getRequestingContacts (){
 
-    console.log("from chat room, current block", this.props.currentBlockNum)
-    
-
-
     let invEvents = await this.state.chatContract.getPastEvents('addContactEvent', {
     filter: {returnValues: [1]}, 
     fromBlock: this.props.currentBlockNum -100,
-    toBlock: this.props.currentBlockNum
-    });
+    toBlock: this.props.currentBlockNum});
     //load these contacts to state: 
 
-   /*  for (let i=0; i<invEvents.length; i++){
-      let kontact = invEvents[i].address;
-      console.log("each kontact", kontact)
-      this.setState({
-      requestList: [...this.state.requestingList, kontact]})
-    } */
-    let copy=[];
+    let copy=[]; //react can't setstate in a loop
     for (var kontact of invEvents){
-      console.log("k", kontact.returnValues)
-      copy.push(kontact.returnValues.requester)
+        if(kontact.returnValues.receiver==this.state.account) 
+        copy.push(kontact.returnValues.requester)
     }
     this.setState({requestingList: copy})
-    console.log("ur requesting list", this.state.requestingList)
+  }
 
-    console.log("inv events", invEvents)
+  async acceptContact(address){
 
 
-}
+    let owner = this.props.selKase.owner;
+    let contractMethods = this.state.chatContract.methods;
+    contractMethods.acceptContactRequest(address).send({from: this.state.account})
+    .once("Contact accepted", rec=>{
+      this.setState({loading: false})
+      this.setState({disChatBtn: true})
+    })
+    
+
+
+
+  }
 
   async sendMsg(e){
     e.preventDefault();
+    if(this.state.msgToSend!=""){
+
+    console.log(this.state.msgToSend)
+
+    //send the msg using smart contract
+
+
+
+    //delete the msg from the field after adding to tempHistory
+  
+    this.state.txtArea.push("You: " +this.state.msgToSend +"\n")
+    this.setState({msgToSend: ""})
+
+    console.log("history", this.state.txtArea)
+
+
+
+
+    }
+    else{
+      console.error("please enter a correct msg")
+    }
     
+  }
+  updateInput(event){
+    this.setState({msgToSend: event.target.value})
   }
 
   render() {
@@ -151,31 +185,62 @@ class ChatRoom extends Component {
                   id="chatWindow"
                   rows="9"
                   placeholder="chats go here"
+                  value={this.state.txtArea}
                 />
               </Col>
               <Col>
                 {/* Contacts Window */}
                 <Form.Label as="legend"> Contacts</Form.Label>
-                <Table>
+                <Table borderless size="sm" responsive="sm">
                   <thead>
                     <tr>
-                      <th>#</th>
+                     
                       <th>Sender Address</th>
-                      <th>
-                        <Button onClick={this.getRelation}>Chat</Button>
-                      </th>
+                      
                     </tr>
                   </thead>
+                  <tbody id="cotactList">
+                    { this.state.requestingList.map((con, key)=>{
+                        return(
+                          <tr key={key.toString()}>
+                            
+                            <td>
+                            {con}
+                            </td>
+                            <td>
+                              <Button 
+                              name ={con}
+                              onClick={
+                                (event)=>
+                                this.acceptContact(event.target.name)
+
+                              }
+                                
+                              >accept</Button>
+                            </td>
+                            <td>
+                              <Button>Chat</Button>
+                            </td>
+                          </tr>
+                        )
+                      })
+                    }
+                   
+                  </tbody>
                 </Table>
               </Col>
             </Row>
 
             <Row>
               <Col className="chatCol" xs={5}>
-                <Form.Control id="userMsg" placeholder="write your message here" />
+                <Form.Control id="userMsg" placeholder="write your message here" 
+                value={this.state.msgToSend}
+                onChange={this.updateInput}
+                required
+                />
               </Col>
               <Col xs={1}>
-                <Form.Control onClick={this.sendMsg}  as="button">Send </Form.Control>
+                <Button onClick={this.sendMsg}>Send </Button>
               </Col>
             </Row>
           </Form>
