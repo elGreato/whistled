@@ -72,6 +72,7 @@ class App extends Component {
       //Load the cases
       for (var i = 1; i <= this.state.caseCount; i++) {
         const kase = await instance.methods.cases(i).call()
+       
         this.setState({
           cases: [...this.state.cases, kase],
         })
