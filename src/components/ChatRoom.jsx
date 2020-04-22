@@ -33,6 +33,8 @@ class ChatRoom extends Component {
 		this.sendMsg = this.sendMsg.bind(this);
 		this.updateInput = this.updateInput.bind(this);
 		this.getChatHistory = this.getChatHistory.bind(this);
+		this.changeChattingTo = this.changeChattingTo.bind(this)
+
   }
   
 
@@ -42,7 +44,7 @@ class ChatRoom extends Component {
 	componentDidMount = async () => {
   
     	//set the contacts
-		this.getRequestingContacts();
+		await this.getRequestingContacts();
 		//set welcome message
 		this.setState({ chatingTo: this.props.selKase.owner });
 		//set chat history
@@ -51,7 +53,6 @@ class ChatRoom extends Component {
 
 		this.getRelation();
 
-		console.log('crnt relation', this.state.currentRelations);
 	};
 
 	async getChatHistory() {
@@ -126,16 +127,13 @@ class ChatRoom extends Component {
 		let copy = [];
 
 		for (var i = 0; i < this.state.requestingList.length; i++) {
-      console.log("at least loop")
       let requester = this.state.requestingList[i];
       let relation = await this.state.chatContract.methods.getRelationWith(requester).call();
       
       copy[requester] = relation
 
     }
-    console.log("copy", copy)
-
-		this.setState({ currentRelations: copy });
+   		this.setState({ currentRelations: copy });
 	}
 
 	async getRequestingContacts() {
@@ -161,7 +159,7 @@ class ChatRoom extends Component {
 			.send({ from: this.state.account })
 			.once('Contact accepted', (rec) => {
 				this.setState({ loading: false });
-				this.setState({ disChatBtn: true });
+				
 			});
 	}
 
@@ -198,6 +196,11 @@ class ChatRoom extends Component {
 	updateInput(event) {
 		this.setState({ msgToSend: event.target.value });
 	}
+	changeChattingTo(add){
+		
+		this.setState({chatingTo: add})
+	}
+
 
 	render() {
 		if (!this.state.updating) {
@@ -243,14 +246,15 @@ class ChatRoom extends Component {
 														<td>{con}</td>
 														<td>
 															<Button
-																disabled={this.state.currentRelations[con]==2}
+																disabled={this.state.currentRelations[con]!=0}
 																name={con}
 																onClick={(event) => this.acceptContact(event.target.name)}>
 																accept
 															</Button>
 														</td>
 														<td>
-															<Button>Chat</Button>
+															<Button name={con}
+															onClick={(event)=>this.changeChattingTo(event.target.name)}>Chat</Button>
 														</td>
 													</tr>
 												);

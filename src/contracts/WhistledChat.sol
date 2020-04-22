@@ -5,6 +5,7 @@ contract WhistledChat {
     //state var
     string public contractName;
     uint256 public membersCount = 0;
+    uint256 public relationsCount =0;
 
     constructor() public {
         contractName = "Whistled Chat";
@@ -18,21 +19,22 @@ contract WhistledChat {
         bool isMember;
     }
 
-    mapping(address => mapping(address => RelationshipType)) relationships;
+    mapping(address => mapping(address => RelationshipType)) public relationships;
     mapping(address => Member) public members;
 
     function addContact(address addr) public onlyMember {
         require(
             relationships[msg.sender][addr] == RelationshipType.NoRelation,
-            "Already connected"
+            "you already sent an invitation"
         );
         require(
             relationships[addr][msg.sender] == RelationshipType.NoRelation,
-            "Already connected"
+            "the person already send an invitation, accept the invitation"
         );
 
         relationships[msg.sender][addr] = RelationshipType.Requested;
         emit addContactEvent(msg.sender, addr);
+        relationsCount++;
     }
 
     event addContactEvent(address requester, address receiver);
@@ -49,7 +51,7 @@ contract WhistledChat {
         emit acceptContactEvent(msg.sender, addr);
     }
 
-    event acceptContactEvent(address a, address b);
+    event acceptContactEvent(address theAccepting, address theAccepted);
 
     function join() public {
         require(
@@ -57,10 +59,14 @@ contract WhistledChat {
             "You are already a member"
         );
 
-        Member memory newMember = Member(msg.sender, 0, true);
+        Member memory newMember = Member(msg.sender, block.number, true);
         members[msg.sender] = newMember;
         membersCount++;
+
+        emit newMemberJoined(msg.sender, block.number);
     }
+
+    event newMemberJoined(address newMemberAddress, uint256 blockNum);
 
     function sendMessage(address to, string memory message) public onlyMember {
         require(
@@ -75,7 +81,7 @@ contract WhistledChat {
         emit messageSentEvent(msg.sender, to, message);
     }
 
-    event messageSentEvent(address a, address c, string b);
+    event messageSentEvent(address msgSender, address msgReceiver, string messages);
 
     modifier onlyMember() {
         require(members[msg.sender].isMember == true, "You are not the owner");
