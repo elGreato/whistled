@@ -4,13 +4,22 @@ Whistled is a blockchain-based whistleblowing platform
 
 ## Use
 
-using a blockchain browswer, go to .
+in the future: using a blockchain browswer, go to .
 
 ```bash
 whistleblowing.crypto
 ```
-Updated to truffle teams
+
+currently:
+```bash
+whistled.herokuapp.com
+```
+
+
 ## Usage
+
+required: MetaMask on your browser. 
+network: currently dev (later Rinkey)
 
 Contact Ali Habbabeh
 
