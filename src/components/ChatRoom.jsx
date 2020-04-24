@@ -75,10 +75,11 @@ class ChatRoom extends Component {
 				if (msgEvents[i].returnValues[1] == this.state.account) {
 					to = 'You';
 				}
-
+				
 				let msg = msgEvents[i].returnValues[2];
-
-				copy.push('from ', from, '\n', 'to ', to, '\n', 'message: ', msg, '\n');
+				if(from ==this.state.chatingTo || to==this.state.chatingTo){
+				copy.push('From: '+ from+ '\n'+ 'To: '+ to+ '\n'+ 'Message: '+ msg+ '\n\n');
+				}
 			} else continue;
 		}
 
@@ -163,7 +164,7 @@ class ChatRoom extends Component {
 			});
 	}
 
-	sendMsg(e) {
+	async sendMsg(e) {
 		//e.preventDefault();
 		if (this.state.msgToSend != '') {
 			this.setState({ updating: true });
@@ -179,9 +180,10 @@ class ChatRoom extends Component {
 				.sendMessage(to, messages)
 				.send({ from: this.state.account })
 				.once('msg sent', (rec) => {
-					this.setState({ updating: false });
+					this.getChatHistory()
 				})
-				.then(this.setState({ updating: false }));
+				.then(
+					this.setState({ updating: false })).then(this.getChatHistory()).then(console.log("done"));
 
 			//delete the msg from the field after adding to tempHistory
 
@@ -192,6 +194,7 @@ class ChatRoom extends Component {
 		} else {
 			console.error('please enter a correct msg');
 		}
+		
 	}
 	updateInput(event) {
 		this.setState({ msgToSend: event.target.value });
@@ -199,6 +202,10 @@ class ChatRoom extends Component {
 	changeChattingTo(add){
 		
 		this.setState({chatingTo: add})
+		/* this.setState({ 
+			txtArea: this.state.txtArea.concat([">>>>"])
+		  }) */
+		  this.getChatHistory()
 	}
 
 
@@ -253,7 +260,10 @@ class ChatRoom extends Component {
 															</Button>
 														</td>
 														<td>
-															<Button name={con}
+															<Button
+															/* href={`/chat/${con}`} */
+															name={con}
+															
 															onClick={(event)=>this.changeChattingTo(event.target.name)}>Chat</Button>
 														</td>
 													</tr>
