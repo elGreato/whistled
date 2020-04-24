@@ -4,7 +4,7 @@ Whistled is a blockchain-based whistleblowing platform
 
 ## Use
 
-in the future: using a blockchain browswer, go to .
+in the future: using a blockchain browser, go to .
 
 ```bash
 whistleblowing.crypto
