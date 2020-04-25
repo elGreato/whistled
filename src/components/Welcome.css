@@ -75,3 +75,13 @@ h5{
 .chatCol{
   margin-bottom: 1rem;
 }
+#chatWindow{
+  background-image: linear-gradient(#F1F1F1 50%, #F9F9F9 50%);
+  background-size: 100% 4rem;
+  border: 1px solid #CCC;
+  width: 100%;
+  height: 400px;
+  line-height: 2rem;
+  margin: 0 auto;
+  padding: 4px 8px;
+}

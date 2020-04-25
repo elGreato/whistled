@@ -12,7 +12,6 @@ class ChatRoom extends Component {
 
 		this.state = {
 			account: this.props.account,
-
 			chatContract: this.props.chatContract,
 			loading: false,
 			relationships: [],
@@ -24,6 +23,7 @@ class ChatRoom extends Component {
 			currentRelations: [], //to deactivate accept button
 			updating: false, //to force re-render
 			errormsg: '',
+			isNowMember: false
 		};
 
 		console.log('chat cont', this.state.chatContract);
@@ -36,6 +36,8 @@ class ChatRoom extends Component {
 		this.updateInput = this.updateInput.bind(this);
 		this.getChatHistory = this.getChatHistory.bind(this);
 		this.changeChattingTo = this.changeChattingTo.bind(this);
+		this.checkMembership= this.checkMembership.bind(this)
+		this.getRelationWith=this.getRelationWith.bind(this)
 	}
 
 	componentDidMount = async () => {
@@ -52,6 +54,8 @@ class ChatRoom extends Component {
 		this.setState({ updating: false });
 
 		this.getRelation();
+		this.checkMembership();
+
 	};
 
 	async getChatHistory() {
@@ -91,6 +95,11 @@ class ChatRoom extends Component {
 
 		this.setState({ updating: false });
 	}
+	async checkMembership(){
+		var mbr =  await this.state.chatContract.methods.members(this.state.account).call();
+		this.setState({isNowMember: mbr.isMember})
+		console.log("is member: ", this.state.isNowMember)
+	}
 
 	async joinChat(e) {
 		e.preventDefault();
@@ -105,12 +114,16 @@ class ChatRoom extends Component {
 				.once('joined chat', (rec) => {
 					this.setState({ loading: false });
 				});
+				this.checkMembership();
+				
 		} catch (error) {
 			// Catch any errors for any of the above operations.
 			alert(`Failed to load web3, relations, or contract. Check console for details.`);
 			console.error(error);
 			this.setState({ errormsg: error });
 			window.alert(this.state.errormsg);
+		
+
 		}
 	}
 
@@ -139,6 +152,13 @@ class ChatRoom extends Component {
 			copy[requester] = relation;
 		}
 		this.setState({ currentRelations: copy });
+	}
+	async getRelationWith(add){
+		let results;
+		let contractMethods = this.state.chatContract.methods;
+		results = contractMethods.getRelationWith(add).call()
+		return results
+
 	}
 
 	async getRequestingContacts() {
@@ -188,9 +208,7 @@ class ChatRoom extends Component {
 				.then(this.getChatHistory())
 				.then(console.log('done'));
 
-			//delete the msg from the field after adding to tempHistory
-
-			// this.state.txtArea.push("You: " + this.state.msgToSend + "\n")
+			
 			this.setState({ msgToSend: '' });
 
 			console.log('history', this.state.txtArea);
@@ -211,21 +229,35 @@ class ChatRoom extends Component {
 		if (!this.state.updating) {
 			return (
 				<div className='chatContainer'>
-					<Container className='Container' fluid='md'>
+					<Container className='Container' fluid='lg'>
 						<Form>
+							<Row>
+							<Col lg="6"> To be able to chat, you must Join. Click Here >> 
+							<Button variant="success" 
+							disabled = {this.state.isNowMember}
+							
+							onClick={this.joinChat}
+							 >Join Chat</Button>
+							</Col>
 							{/* First Block */}
 							<Col>
-								<Row className='r1'>Chatting with Whistleblower of address: {this.state.chatingTo}</Row>
+								<Row className='r1'>
+									Chatting with Whistleblower of address: {this.state.chatingTo}
+								</Row>
 							</Col>
+							
 							<Col>
-								<Button onClick={this.joinChat}>Join Chat</Button>
-								<Button onClick={this.requestContact}>Request to Contact</Button>
+								
+								<Button variant="success" 
+								disabled={this.getRelationWith(this.props.selKase.owner) ==0}
+								onClick={this.requestContact}>Request to Contact</Button>
 							</Col>
-
+							</Row>
 							<br />
 							<Row>
 								{/* Chat Window */}
-								<Col className='chatCol' xs={6}>
+								<Col className='chatCol' md={6}>
+
 									<Form.Control
 										readOnly
 										as='textarea'
@@ -253,15 +285,16 @@ class ChatRoom extends Component {
 															<Button
 																disabled={this.state.currentRelations[con] != 0}
 																name={con}
-																onClick={(event) => this.acceptContact(event.target.name)}>
+																onClick={(event) =>
+																 this.acceptContact(event.target.name)}>
 																accept
 															</Button>
 														</td>
 														<td>
 															<Button
-																/* href={`/chat/${con}`} */
 																name={con}
-																onClick={(event) => this.changeChattingTo(event.target.name)}>
+																onClick={(event) =>
+																 this.changeChattingTo(event.target.name)}>
 																Chat
 															</Button>
 														</td>
