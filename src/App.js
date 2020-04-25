@@ -39,6 +39,7 @@ class App extends Component {
   }
 
   componentDidMount = async () => {
+    document.title= "Whistled"
     try {
       // Get network provider and web3 instance.
       const web3 = await getWeb3()

@@ -22,6 +22,7 @@ class NewCase extends Component {
 
     this.handleOptionChange = this.handleOptionChange.bind(this)
     this.handleFileChange = this.handleFileChange.bind(this)
+    document.title= "Submit Disclousres"
   }
 
   handleOptionChange = changeEvent => {

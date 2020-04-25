@@ -42,6 +42,8 @@ class ChatRoom extends Component {
 
 
 	componentDidMount = async () => {
+		
+		{document.title= "Secure Chat"}
   
     	//set the contacts
 		await this.getRequestingContacts();

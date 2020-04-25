@@ -7,7 +7,7 @@ class Mart extends Component {
     return (
       <div style={{ marginTop: "6em" }}>
         
-
+        {document.title= "Marketplace"}
         {this.props.loading 
         ? <div> Loading..</div> 
         : <h1>Current Casees</h1>}
