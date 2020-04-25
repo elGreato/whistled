@@ -28,7 +28,8 @@ class App extends Component {
       loading: false,
       cases: [],
       caseCount: 0,
-      currentBlockNum: null,
+      userStartBlock: null,
+      currentBlockNum: null
     }
 
     //bind all function here
@@ -61,11 +62,17 @@ class App extends Component {
       this.setState({ chatContract })
 
       //get block number 
-      web3.eth.getBlockNumber().then(data => {
+       web3.eth.getBlockNumber().then(data => {
         this.setState({ currentBlockNum: data })
-      });
+      }); 
 
+      //get member join block
+      const user = await chatContract.methods.members(accounts[0]).call();
+      this.setState({userStartBlock: user.messageStartBlock});
 
+      console.log("this user's block is ", this.state.userStartBlock)
+      console.log("while curret block is ", this.state.currentBlockNum)
+      
 
       const count = await instance.methods.caseCount().call()
       this.setState({ caseCount: count })
@@ -198,6 +205,7 @@ class App extends Component {
                     <ChatRoom
                       chatContract={this.state.chatContract}
                       currentBlockNum={this.state.currentBlockNum}
+                      userStartBlock={this.state.userStartBlock}
                       account={this.state.accounts[0]}
                       selKase={this.state.cases[parseInt(props.match.params.id) - 1]}
                       {...props} //this was painful to find

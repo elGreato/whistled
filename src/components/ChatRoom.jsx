@@ -12,6 +12,7 @@ class ChatRoom extends Component {
 
 		this.state = {
 			account: this.props.account,
+
 			chatContract: this.props.chatContract,
 			loading: false,
 			relationships: [],
@@ -22,6 +23,7 @@ class ChatRoom extends Component {
 			chatingTo: '',
 			currentRelations: [], //to deactivate accept button
 			updating: false, //to force re-render
+			errormsg: '',
 		};
 
 		console.log('chat cont', this.state.chatContract);
@@ -33,19 +35,15 @@ class ChatRoom extends Component {
 		this.sendMsg = this.sendMsg.bind(this);
 		this.updateInput = this.updateInput.bind(this);
 		this.getChatHistory = this.getChatHistory.bind(this);
-		this.changeChattingTo = this.changeChattingTo.bind(this)
-
-  }
-  
-
-    
-
+		this.changeChattingTo = this.changeChattingTo.bind(this);
+	}
 
 	componentDidMount = async () => {
-		
-		{document.title= "Secure Chat"}
-  
-    	//set the contacts
+		{
+			document.title = 'Secure Chat';
+		}
+
+		//set the contacts
 		await this.getRequestingContacts();
 		//set welcome message
 		this.setState({ chatingTo: this.props.selKase.owner });
@@ -54,13 +52,12 @@ class ChatRoom extends Component {
 		this.setState({ updating: false });
 
 		this.getRelation();
-
 	};
 
 	async getChatHistory() {
 		let msgEvents = await this.state.chatContract.getPastEvents('messageSentEvent', {
 			//filter: { returnValues: [1] },
-			fromBlock: this.props.currentBlockNum - 100,
+			fromBlock: this.props.currentBlockNum - this.props.userStartBlock,
 			toBlock: this.props.currentBlockNum,
 		});
 		const copy = [];
@@ -77,10 +74,15 @@ class ChatRoom extends Component {
 				if (msgEvents[i].returnValues[1] == this.state.account) {
 					to = 'You';
 				}
-				
+
 				let msg = msgEvents[i].returnValues[2];
-				if(from ==this.state.chatingTo || to==this.state.chatingTo){
-				copy.push('From: '+ from+ '\n'+ 'To: '+ to+ '\n'+ 'Message: '+ msg+ '\n\n');
+				if (from == this.state.chatingTo || to == this.state.chatingTo) {
+					if (from == this.state.chatingTo) {
+						from = 'whistler';
+					} else if (to == this.state.chatingTo) {
+						to = 'whistler';
+					}
+					copy.push( from + ' to ' + to +":"+ '\n'  + msg + '\n\n');
 				}
 			} else continue;
 		}
@@ -107,6 +109,8 @@ class ChatRoom extends Component {
 			// Catch any errors for any of the above operations.
 			alert(`Failed to load web3, relations, or contract. Check console for details.`);
 			console.error(error);
+			this.setState({ errormsg: error });
+			window.alert(this.state.errormsg);
 		}
 	}
 
@@ -124,25 +128,23 @@ class ChatRoom extends Component {
 	}
 
 	async getRelation() {
-
-    await this.getRequestingContacts()
+		await this.getRequestingContacts();
 
 		let copy = [];
 
 		for (var i = 0; i < this.state.requestingList.length; i++) {
-      let requester = this.state.requestingList[i];
-      let relation = await this.state.chatContract.methods.getRelationWith(requester).call();
-      
-      copy[requester] = relation
+			let requester = this.state.requestingList[i];
+			let relation = await this.state.chatContract.methods.getRelationWith(requester).call();
 
-    }
-   		this.setState({ currentRelations: copy });
+			copy[requester] = relation;
+		}
+		this.setState({ currentRelations: copy });
 	}
 
 	async getRequestingContacts() {
 		let invEvents = await this.state.chatContract.getPastEvents('addContactEvent', {
 			filter: { returnValues: [1] },
-			fromBlock: this.props.currentBlockNum - 100,
+			fromBlock: this.props.currentBlockNum - this.props.userStartBlock,
 			toBlock: this.props.currentBlockNum,
 		});
 		//load these contacts to state:
@@ -151,8 +153,7 @@ class ChatRoom extends Component {
 		for (var kontact of invEvents) {
 			if (kontact.returnValues.receiver == this.state.account) copy.push(kontact.returnValues.requester);
 		}
-    this.setState({ requestingList: copy });
-
+		this.setState({ requestingList: copy });
 	}
 
 	async acceptContact(address) {
@@ -162,7 +163,6 @@ class ChatRoom extends Component {
 			.send({ from: this.state.account })
 			.once('Contact accepted', (rec) => {
 				this.setState({ loading: false });
-				
 			});
 	}
 
@@ -182,10 +182,11 @@ class ChatRoom extends Component {
 				.sendMessage(to, messages)
 				.send({ from: this.state.account })
 				.once('msg sent', (rec) => {
-					this.getChatHistory()
+					this.getChatHistory();
 				})
-				.then(
-					this.setState({ updating: false })).then(this.getChatHistory()).then(console.log("done"));
+				.then(this.setState({ updating: false }))
+				.then(this.getChatHistory())
+				.then(console.log('done'));
 
 			//delete the msg from the field after adding to tempHistory
 
@@ -196,20 +197,15 @@ class ChatRoom extends Component {
 		} else {
 			console.error('please enter a correct msg');
 		}
-		
 	}
 	updateInput(event) {
 		this.setState({ msgToSend: event.target.value });
 	}
-	changeChattingTo(add){
-		
-		this.setState({chatingTo: add})
-		/* this.setState({ 
-			txtArea: this.state.txtArea.concat([">>>>"])
-		  }) */
-		  this.getChatHistory()
-	}
+	changeChattingTo(add) {
+		this.setState({ chatingTo: add });
 
+		this.getChatHistory();
+	}
 
 	render() {
 		if (!this.state.updating) {
@@ -236,7 +232,7 @@ class ChatRoom extends Component {
 										id='chatWindow'
 										rows='9'
 										placeholder='chats go here'
-										value={this.state.txtArea}
+										value={this.state.txtArea.join("")}
 									/>
 								</Col>
 								<Col>
@@ -255,7 +251,7 @@ class ChatRoom extends Component {
 														<td>{con}</td>
 														<td>
 															<Button
-																disabled={this.state.currentRelations[con]!=0}
+																disabled={this.state.currentRelations[con] != 0}
 																name={con}
 																onClick={(event) => this.acceptContact(event.target.name)}>
 																accept
@@ -263,10 +259,11 @@ class ChatRoom extends Component {
 														</td>
 														<td>
 															<Button
-															/* href={`/chat/${con}`} */
-															name={con}
-															
-															onClick={(event)=>this.changeChattingTo(event.target.name)}>Chat</Button>
+																/* href={`/chat/${con}`} */
+																name={con}
+																onClick={(event) => this.changeChattingTo(event.target.name)}>
+																Chat
+															</Button>
 														</td>
 													</tr>
 												);
