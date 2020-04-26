@@ -9,15 +9,40 @@ import Button from 'react-bootstrap/Button'
 class MainGrid extends Component {
   constructor(props) {
     super(props)
-    this.state = { tempText: 'output: ',
-    selectedCase: ""
+    this.state = { 
+    tempText: 'output: ',
+    selectedCase: "",
+    isKaseOwner: false,
+    account: this.props.account
   }
+  this.checkOwnership = this.checkOwnership.bind(this)
+  this.getCaseDocs = this.getCaseDocs.bind(this)
+  this.getKey = this.getKey.bind(this)
+  console.log(this.props)
   }
 
   updateHistory(){
     console.log("nothing")
   
    // this.props.history.push(`/chat/${this.state.selectedCase}`)
+  }
+
+  checkOwnership(kase){
+    const isOwner = (kase.owner == this.state.account)
+    console.log("is ownership checked", isOwner, "current user", this.state.account, "case owner", kase.owner)
+    return isOwner
+  }
+
+  getCaseDocs(kase){
+
+   this.setState({tempText : kase.caseDocs})
+
+  }
+
+  getKey(kase){
+
+    this.setState({tempText : kase.caseDecKey})
+
   }
 
   render() {
@@ -35,7 +60,7 @@ class MainGrid extends Component {
                 <Card.Text>Describtion: {kase.caseDescribtion}</Card.Text>
                 <Card.Text>Price: {kase.casePrice / 1e18} ETH</Card.Text>
 
-                {!kase.isPurchased ? (
+                {!kase.isPurchased && !this.checkOwnership(kase)? (
                   <div>
                     <div className="btnHolder">
                       <Button
@@ -79,9 +104,8 @@ class MainGrid extends Component {
                       <Button
                         variant="danger"
                         onClick={event => {
-                          //let res;
-                          //res = this.props.getCaseDocs(kase.caseId)
-                          this.setState({ tempText: kase.caseDecKey })
+
+                          this.getKey(kase)
                         }}
                       >
                         Get Decryption Key

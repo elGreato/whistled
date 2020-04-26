@@ -8,6 +8,7 @@ import ChatRoom from './components/ChatRoom'
 import Welcome from './components/Welcome'
 import Mart from './components/Mart'
 import NewCase from './components/NewCase'
+import MainGrid from './components/MainGrid'
 
 import {
   withRouter,
@@ -27,6 +28,7 @@ class App extends Component {
       chatContract: null,
       loading: false,
       cases: [],
+      userCases:[],
       caseCount: 0,
       userStartBlock: null,
       currentBlockNum: null
@@ -84,6 +86,11 @@ class App extends Component {
         this.setState({
           cases: [...this.state.cases, kase],
         })
+      
+        //use specific cases
+        if(kase.owner==accounts[0]){
+        this.setState({userCases: [...this.state.userCases, kase]})
+        }
       }
 
 
@@ -179,6 +186,7 @@ class App extends Component {
 
                       caseCount={this.state.caseCount}
                       cases={this.state.cases}
+                      account={this.state.accounts[0]}
                       purchaseCase={this.purchaseCase}
                       getCaseDocs={this.getCaseDocs}
                       loading={this.state.loading}
@@ -212,6 +220,25 @@ class App extends Component {
                     />
                   )}
                 />
+
+                <Route
+                exact
+                path="/myCases"
+                render={props=>(
+                  <MainGrid cases={this.state.userCases}
+                  caseCount={this.state.caseCount}
+                  account={this.state.accounts[0]}
+                  purchaseCase={this.purchaseCase}
+                  getCaseDocs={this.getCaseDocs}
+                  loading={this.state.loading}
+                  {...props}
+                  />
+                )}
+                
+                
+                />
+
+         
               </div>
             </React.Fragment>
           </Switch>

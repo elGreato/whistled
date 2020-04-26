@@ -28,7 +28,7 @@ class NavBar extends Component {
             <Nav.Link href="/newCase">Submit a Case</Nav.Link>
           </Nav.Item>
           <Nav.Item>
-            <Nav.Link href="/chat">Chat</Nav.Link>
+            <Nav.Link href="/mycases">Follow Up</Nav.Link>
           </Nav.Item>
         </Nav>
         <Nav>
