@@ -58,21 +58,7 @@ class NewCase extends Component {
     return result
   }
 
-  // e.g. http://ipfs.infura.io/ipfs/Qmb8dunuNT5bVr5yZ2GJkWQ2VABrN9xPUsyVpX8kwEX8aA
-  decrypt = encrypted => {
-    let key = this.state.caseDecKey
-    key = crypto
-      .createHash('sha256')
-      .update(key)
-      .digest('base64')
-      .substr(0, 32)
-    // Get the iv: the first 16 bytes
-    const iv = encrypted.slice(0, 16) // Get the rest
-    encrypted = encrypted.slice(16) // Create a decipher
-    const decipher = crypto.createDecipheriv(algorithm, key, iv) // Actually decrypt it
-    const result = Buffer.concat([decipher.update(encrypted), decipher.final()])
-    return result
-  }
+
 
   render() {
     return (
