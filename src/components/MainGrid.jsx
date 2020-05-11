@@ -124,7 +124,7 @@ class MainGrid extends Component {
 												<div>
 												{this.getCaseDocs(kase)}
 													<img
-														src='https://images.pexels.com/photos/20787/pexels-photo.jpg?auto=compress&cs=tinysrgb&h=350'
+														src={`https://ipfs.infura.io/ipfs/${kase.caseDocs}`}
 														alt='new'
 													/>
 												</div>

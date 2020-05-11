@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import img_whis from '../assets/whistleImg.jpg';
+import img_whis from '../assets/whistleImg.png';
 import img_mart from '../assets/marketImg.png'
 import img_folo from '../assets/followupImg.png'
 import './Welcome.css';
@@ -31,7 +31,7 @@ class Welcome extends Component {
 						<Card.Body>
 							<Card.Title>Whistleblowing Marketplace</Card.Title>
 							<Card.Text>
-								Are you a journalist or a corruption fighter? Check the cases listed in the Market place
+								Are you a journalist? Check the cases listed in the Marketplace
 							</Card.Text>
 						</Card.Body>
 						<Card.Footer>
@@ -46,7 +46,7 @@ class Welcome extends Component {
 						<Card.Img className='cImg' variant='top' src={img_folo} />
 						<Card.Body>
 							<Card.Title>Already submitted a case?</Card.Title>
-							<Card.Text>Follow up on a case</Card.Text>
+							<Card.Text>Follow up on a case you already submitted and chat with buyers</Card.Text>
 						</Card.Body>
 						<Card.Footer>
 							<Button href='/mycases' variant='primary'>

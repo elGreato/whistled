@@ -187,7 +187,7 @@ class ChatRoom extends Component {
 		if (this.state.msgToSend != '') {
 			this.setState({ updating: true });
 
-			console.log(this.state.msgToSend);
+
 
 			//send the msg using smart contract
 			let contractMethods = this.state.chatContract.methods;

@@ -92,8 +92,9 @@ class NewCase extends Component {
                     console.log('cawes pass', caseDecKey)
                     console.log('state caseDecKey', this.state.caseDecKey)
 
-                    //Now encrypt
-                    const encryptedBuffer = this.encrypt(this.state.buffer)
+                    //Now encrypt  //stop encryption temporarly for testing
+                    //const encryptedBuffer = this.encrypt(this.state.buffer)
+                    const encryptedBuffer = this.state.buffer
 
                     //Submit file to IPFS -- view file fia https://ipfs.infura.io/ipfs/$HASH
                     var promise = new Promise((resolve, reject) => {
