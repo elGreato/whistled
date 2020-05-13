@@ -5,7 +5,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import Table from 'react-bootstrap/Table';
-import myTools from './myUtils/myTools'
+import myTools from './myUtils/myTools';
 
 class ChatRoom extends Component {
 	constructor(props) {
@@ -45,15 +45,12 @@ class ChatRoom extends Component {
 
 	componentDidMount = async () => {
 		document.title = 'Secure Chat';
-
 		//set the contacts
 		await this.getRequestingContacts();
-
 		//set welcome message
 		this.setState({ chatingTo: this.props.selKase.owner });
-
 		//set chat history
-	//	this.getChatHistory();
+		//	this.getChatHistory(); Now it's done by a button
 		this.setState({ updating: false });
 		this.getRelation();
 		this.checkMembership();
@@ -61,7 +58,6 @@ class ChatRoom extends Component {
 
 	async getChatHistory() {
 		let msgEvents = await this.state.chatContract.getPastEvents('messageSentEvent', {
-			//filter: { returnValues: [1] },
 			fromBlock: this.props.currentBlockNum - this.props.userStartBlock,
 			toBlock: this.props.currentBlockNum,
 		});
@@ -76,31 +72,23 @@ class ChatRoom extends Component {
 					from = 'You';
 					let contractMethods = this.state.chatContract.methods;
 					let senderObject = await contractMethods.members(to).call();
-					 senderPubKey = senderObject.pubKey;
+					senderPubKey = senderObject.pubKey;
 				}
 
 				if (msgEvents[i].returnValues[1] == this.state.account) {
 					to = 'You';
 					let contractMethods = this.state.chatContract.methods;
 					let senderObject = await contractMethods.members(from).call();
-					 senderPubKey = senderObject.pubKey;
-					//senderPubKey = '04' + myTools.privateToPublic(pk).toString('hex');
+					senderPubKey = senderObject.pubKey;
 				}
 
 				let msg = msgEvents[i].returnValues[2];
 
-
-				//decrypt the messages
-				//get sender public key
-
 				//compute the secret to encrypt the message
-				console.log("both keys", this.state.privateKey, "and ", senderPubKey)
 				let secret = myTools.computeSecret(this.state.privateKey, Buffer.from(senderPubKey, 'hex'));
 
-				
-
-				let decMsg = myTools.decrypt(msg, secret)
-
+				//decrypt the messages
+				let decMsg = myTools.decrypt(msg, secret);
 
 				if (from == this.state.chatingTo || to == this.state.chatingTo) {
 					if (from == this.state.chatingTo) {
@@ -117,18 +105,16 @@ class ChatRoom extends Component {
 		this.setState({ updating: false });
 	}
 
-
 	async checkMembership() {
 		var mbr = await this.state.chatContract.methods.members(this.state.account).call();
 		this.setState({ isNowMember: mbr.isMember });
 		console.log('is member: ', this.state.isNowMember);
 	}
-	
 
 	async joinChat(e) {
 		e.preventDefault();
-		const pubKey = '04'+myTools.privateToPublic(this.state.privateKey).toString('hex');
-		console.log("priv Key", this.state.privateKey, "pub Key", pubKey)
+		const pubKey = '04' + myTools.privateToPublic(this.state.privateKey).toString('hex');
+		console.log('priv Key', this.state.privateKey, 'pub Key', pubKey);
 
 		try {
 			console.log(this.state.chatContract);
@@ -213,8 +199,6 @@ class ChatRoom extends Component {
 		if (this.state.msgToSend != '') {
 			this.setState({ updating: true });
 
-
-
 			//send the msg using smart contract
 			let contractMethods = this.state.chatContract.methods;
 			let to = this.state.chatingTo;
@@ -222,7 +206,6 @@ class ChatRoom extends Component {
 			//get public key of the person we want to send message to
 			let receiverObject = await contractMethods.members(to).call();
 			let receiverPubKey = receiverObject.pubKey;
-			
 
 			//compute the secret to encrypt the message
 			let secret = myTools.computeSecret(this.state.privateKey, Buffer.from(receiverPubKey, 'hex'));
@@ -249,9 +232,9 @@ class ChatRoom extends Component {
 	updateInput(event) {
 		this.setState({ msgToSend: event.target.value });
 	}
-	updatePK(event){
-		this.setState({privateKey: Buffer.from(event.target.value, 'hex') });
-		console.log(this.state.privateKey)
+	updatePK(event) {
+		this.setState({ privateKey: Buffer.from(event.target.value, 'hex') });
+		console.log(this.state.privateKey);
 	}
 	changeChattingTo(add) {
 		this.setState({ chatingTo: add });
@@ -264,84 +247,81 @@ class ChatRoom extends Component {
 			return (
 				<div className='chatContainer'>
 					<Container className='Container' fluid='lg'>
-						
-							<Row>
+						<Row>
 							<Form>
 								<Col lg='6'>
 									{' '}
 									To be able to chat, you must Join. for that, you need your private key >>
-									<Form.Control required placeholder="enter your private key" onChange={this.updatePK}/>
+									<Form.Control required placeholder='enter your private key' onChange={this.updatePK} />
 									<Button variant='success' disabled={this.state.isNowMember} onClick={this.joinChat}>
 										Join Chat
 									</Button>
 								</Col>
-								</Form>
+							</Form>
 
+							{/* First Block */}
+							<Col>
+								<Row className='r1'>Chatting with Whistleblower of address: {this.state.chatingTo}</Row>
+							</Col>
 
-								{/* First Block */}
-								<Col>
-									<Row className='r1'>Chatting with Whistleblower of address: {this.state.chatingTo}</Row>
-								</Col>
-
-								<Col>
-									<Button
-										variant='success'
-										disabled={this.getRelationWith(this.props.selKase.owner) == 0}
-										onClick={this.requestContact}>
-										Request to Contact
-									</Button>
-								</Col>
-							</Row>
-							<br />
-							<Row>
-								{/* Chat Window */}
-								<Col className='chatCol' md={6}>
-									<Form.Control
-										readOnly
-										as='textarea'
-										id='chatWindow'
-										rows='9'
-										placeholder='chats go here'
-										value={this.state.txtArea.join('')}
-									/>
-									<Button onClick={this.getChatHistory}>Get chat history</Button>
-								</Col>
-								<Col>
-									{/* Contacts Window */}
-									<Form.Label as='legend'> Contacts</Form.Label>
-									<Table borderless size='sm' responsive='sm'>
-										<thead>
-											<tr>
-												<th>Sender Address</th>
-											</tr>
-										</thead>
-										<tbody id='cotactList'>
-											{this.state.requestingList.map((con, key) => {
-												return (
-													<tr key={key.toString()}>
-														<td>{con}</td>
-														<td>
-															<Button
-																disabled={this.state.currentRelations[con] != 0}
-																name={con}
-																onClick={(event) => this.acceptContact(event.target.name)}>
-																accept
-															</Button>
-														</td>
-														<td>
-															<Button name={con} onClick={(event) => this.changeChattingTo(event.target.name)}>
-																Chat
-															</Button>
-														</td>
-													</tr>
-												);
-											})}
-										</tbody>
-									</Table>
-								</Col>
-							</Row>
-							<Form>
-
+							<Col>
+								<Button
+									variant='success'
+									disabled={this.getRelationWith(this.props.selKase.owner) == 0}
+									onClick={this.requestContact}>
+									Request to Contact
+								</Button>
+							</Col>
+						</Row>
+						<br />
+						<Row>
+							{/* Chat Window */}
+							<Col className='chatCol' md={6}>
+								<Form.Control
+									readOnly
+									as='textarea'
+									id='chatWindow'
+									rows='9'
+									placeholder='chats go here'
+									value={this.state.txtArea.join('')}
+								/>
+								<Button onClick={this.getChatHistory}>Get chat history</Button>
+							</Col>
+							<Col>
+								{/* Contacts Window */}
+								<Form.Label as='legend'> Contacts</Form.Label>
+								<Table borderless size='sm' responsive='sm'>
+									<thead>
+										<tr>
+											<th>Sender Address</th>
+										</tr>
+									</thead>
+									<tbody id='cotactList'>
+										{this.state.requestingList.map((con, key) => {
+											return (
+												<tr key={key.toString()}>
+													<td>{con}</td>
+													<td>
+														<Button
+															disabled={this.state.currentRelations[con] != 0}
+															name={con}
+															onClick={(event) => this.acceptContact(event.target.name)}>
+															accept
+														</Button>
+													</td>
+													<td>
+														<Button name={con} onClick={(event) => this.changeChattingTo(event.target.name)}>
+															Chat
+														</Button>
+													</td>
+												</tr>
+											);
+										})}
+									</tbody>
+								</Table>
+							</Col>
+						</Row>
+						<Form>
 							<Row>
 								<Col className='chatCol' xs={5}>
 									<Form.Control
