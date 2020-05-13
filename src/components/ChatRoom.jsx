@@ -5,6 +5,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import Table from 'react-bootstrap/Table';
+import myTools from './myUtils/myTools'
 
 class ChatRoom extends Component {
 	constructor(props) {
@@ -19,6 +20,7 @@ class ChatRoom extends Component {
 			requestingList: [],
 			msgToSend: '',
 			txtArea: [],
+			privateKey: '',
 			chatingTo: '',
 			currentRelations: [], //to deactivate accept button
 			updating: false, //to force re-render
@@ -38,6 +40,7 @@ class ChatRoom extends Component {
 		this.changeChattingTo = this.changeChattingTo.bind(this);
 		this.checkMembership = this.checkMembership.bind(this);
 		this.getRelationWith = this.getRelationWith.bind(this);
+		this.updatePK = this.updatePK.bind(this);
 	}
 
 	componentDidMount = async () => {
@@ -50,7 +53,7 @@ class ChatRoom extends Component {
 		this.setState({ chatingTo: this.props.selKase.owner });
 
 		//set chat history
-		this.getChatHistory();
+	//	this.getChatHistory();
 		this.setState({ updating: false });
 		this.getRelation();
 		this.checkMembership();
@@ -67,24 +70,45 @@ class ChatRoom extends Component {
 		for (let i = 0; i < msgEvents.length; i++) {
 			let from = msgEvents[i].returnValues[0];
 			let to = msgEvents[i].returnValues[1];
-
+			let senderPubKey;
 			if (from == this.state.account || to == this.state.account) {
 				if (msgEvents[i].returnValues[0] == this.state.account) {
 					from = 'You';
+					let contractMethods = this.state.chatContract.methods;
+					let senderObject = await contractMethods.members(to).call();
+					 senderPubKey = senderObject.pubKey;
 				}
 
 				if (msgEvents[i].returnValues[1] == this.state.account) {
 					to = 'You';
+					let contractMethods = this.state.chatContract.methods;
+					let senderObject = await contractMethods.members(from).call();
+					 senderPubKey = senderObject.pubKey;
+					//senderPubKey = '04' + myTools.privateToPublic(pk).toString('hex');
 				}
 
 				let msg = msgEvents[i].returnValues[2];
+
+
+				//decrypt the messages
+				//get sender public key
+
+				//compute the secret to encrypt the message
+				console.log("both keys", this.state.privateKey, "and ", senderPubKey)
+				let secret = myTools.computeSecret(this.state.privateKey, Buffer.from(senderPubKey, 'hex'));
+
+				
+
+				let decMsg = myTools.decrypt(msg, secret)
+
+
 				if (from == this.state.chatingTo || to == this.state.chatingTo) {
 					if (from == this.state.chatingTo) {
 						from = 'whistler';
 					} else if (to == this.state.chatingTo) {
 						to = 'whistler';
 					}
-					copy.push(from + ' to ' + to + ':' + '\n' + msg + '\n\n');
+					copy.push(from + ' to ' + to + ':' + '\n' + decMsg + '\n\n');
 				}
 			} else continue;
 		}
@@ -103,13 +127,15 @@ class ChatRoom extends Component {
 
 	async joinChat(e) {
 		e.preventDefault();
+		const pubKey = '04'+myTools.privateToPublic(this.state.privateKey).toString('hex');
+		console.log("priv Key", this.state.privateKey, "pub Key", pubKey)
 
 		try {
 			console.log(this.state.chatContract);
 			this.setState({ loading: true });
 			let contractMethods = this.state.chatContract.methods;
 			contractMethods
-				.join()
+				.join(pubKey)
 				.send({ from: this.state.account })
 				.once('joined chat', (rec) => {
 					this.setState({ loading: false });
@@ -193,9 +219,18 @@ class ChatRoom extends Component {
 			let contractMethods = this.state.chatContract.methods;
 			let to = this.state.chatingTo;
 			let messages = this.state.msgToSend;
+			//get public key of the person we want to send message to
+			let receiverObject = await contractMethods.members(to).call();
+			let receiverPubKey = receiverObject.pubKey;
+			
+
+			//compute the secret to encrypt the message
+			let secret = myTools.computeSecret(this.state.privateKey, Buffer.from(receiverPubKey, 'hex'));
+
+			let encryptedMessages = myTools.encrypt(messages, secret);
 
 			contractMethods
-				.sendMessage(to, messages)
+				.sendMessage(to, encryptedMessages)
 				.send({ from: this.state.account })
 				.once('msg sent', (rec) => {
 					this.getChatHistory();
@@ -214,6 +249,10 @@ class ChatRoom extends Component {
 	updateInput(event) {
 		this.setState({ msgToSend: event.target.value });
 	}
+	updatePK(event){
+		this.setState({privateKey: Buffer.from(event.target.value, 'hex') });
+		console.log(this.state.privateKey)
+	}
 	changeChattingTo(add) {
 		this.setState({ chatingTo: add });
 
@@ -225,15 +264,20 @@ class ChatRoom extends Component {
 			return (
 				<div className='chatContainer'>
 					<Container className='Container' fluid='lg'>
-						<Form>
+						
 							<Row>
+							<Form>
 								<Col lg='6'>
 									{' '}
-									To be able to chat, you must Join. Click Here >>
+									To be able to chat, you must Join. for that, you need your private key >>
+									<Form.Control required placeholder="enter your private key" onChange={this.updatePK}/>
 									<Button variant='success' disabled={this.state.isNowMember} onClick={this.joinChat}>
 										Join Chat
 									</Button>
 								</Col>
+								</Form>
+
+
 								{/* First Block */}
 								<Col>
 									<Row className='r1'>Chatting with Whistleblower of address: {this.state.chatingTo}</Row>
@@ -260,6 +304,7 @@ class ChatRoom extends Component {
 										placeholder='chats go here'
 										value={this.state.txtArea.join('')}
 									/>
+									<Button onClick={this.getChatHistory}>Get chat history</Button>
 								</Col>
 								<Col>
 									{/* Contacts Window */}
@@ -295,6 +340,7 @@ class ChatRoom extends Component {
 									</Table>
 								</Col>
 							</Row>
+							<Form>
 
 							<Row>
 								<Col className='chatCol' xs={5}>

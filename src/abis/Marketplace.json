@@ -1606,10 +1606,10 @@
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        672,
-                        673
+                        677,
+                        678
                       ],
-                      "referencedDeclaration": 673,
+                      "referencedDeclaration": 678,
                       "src": "1766:7:0",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
@@ -1722,10 +1722,10 @@
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        672,
-                        673
+                        677,
+                        678
                       ],
-                      "referencedDeclaration": 673,
+                      "referencedDeclaration": 678,
                       "src": "1842:7:0",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
@@ -1949,7 +1949,7 @@
                             "name": "msg",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 669,
+                            "referencedDeclaration": 674,
                             "src": "2156:3:0",
                             "typeDescriptions": {
                               "typeIdentifier": "t_magic_message",
@@ -2193,7 +2193,7 @@
                           "name": "msg",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 669,
+                          "referencedDeclaration": 674,
                           "src": "2450:3:0",
                           "typeDescriptions": {
                             "typeIdentifier": "t_magic_message",
@@ -2851,10 +2851,10 @@
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        672,
-                        673
+                        677,
+                        678
                       ],
-                      "referencedDeclaration": 673,
+                      "referencedDeclaration": 678,
                       "src": "2750:7:0",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
@@ -2902,7 +2902,7 @@
                             "name": "msg",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 669,
+                            "referencedDeclaration": 674,
                             "src": "2883:3:0",
                             "typeDescriptions": {
                               "typeIdentifier": "t_magic_message",
@@ -2994,10 +2994,10 @@
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        672,
-                        673
+                        677,
+                        678
                       ],
-                      "referencedDeclaration": 673,
+                      "referencedDeclaration": 678,
                       "src": "2875:7:0",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
@@ -3105,10 +3105,10 @@
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        672,
-                        673
+                        677,
+                        678
                       ],
-                      "referencedDeclaration": 673,
+                      "referencedDeclaration": 678,
                       "src": "2982:7:0",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
@@ -3171,7 +3171,7 @@
                             "name": "msg",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 669,
+                            "referencedDeclaration": 674,
                             "src": "3110:3:0",
                             "typeDescriptions": {
                               "typeIdentifier": "t_magic_message",
@@ -3232,10 +3232,10 @@
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        672,
-                        673
+                        677,
+                        678
                       ],
-                      "referencedDeclaration": 673,
+                      "referencedDeclaration": 678,
                       "src": "3091:7:0",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
@@ -3307,7 +3307,7 @@
                         "name": "msg",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 669,
+                        "referencedDeclaration": 674,
                         "src": "3248:3:0",
                         "typeDescriptions": {
                           "typeIdentifier": "t_magic_message",
@@ -3490,7 +3490,7 @@
                           "name": "msg",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 669,
+                          "referencedDeclaration": 674,
                           "src": "3411:3:0",
                           "typeDescriptions": {
                             "typeIdentifier": "t_magic_message",
@@ -3770,7 +3770,7 @@
                           "name": "msg",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 669,
+                          "referencedDeclaration": 674,
                           "src": "3654:3:0",
                           "typeDescriptions": {
                             "typeIdentifier": "t_magic_message",
@@ -4031,7 +4031,7 @@
                           "name": "msg",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 669,
+                          "referencedDeclaration": 674,
                           "src": "3798:3:0",
                           "typeDescriptions": {
                             "typeIdentifier": "t_magic_message",
@@ -4388,7 +4388,7 @@
                           "name": "msg",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 669,
+                          "referencedDeclaration": 674,
                           "src": "4061:3:0",
                           "typeDescriptions": {
                             "typeIdentifier": "t_magic_message",
@@ -5916,10 +5916,10 @@
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        672,
-                        673
+                        677,
+                        678
                       ],
-                      "referencedDeclaration": 673,
+                      "referencedDeclaration": 678,
                       "src": "1766:7:0",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
@@ -6032,10 +6032,10 @@
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        672,
-                        673
+                        677,
+                        678
                       ],
-                      "referencedDeclaration": 673,
+                      "referencedDeclaration": 678,
                       "src": "1842:7:0",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
@@ -6259,7 +6259,7 @@
                             "name": "msg",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 669,
+                            "referencedDeclaration": 674,
                             "src": "2156:3:0",
                             "typeDescriptions": {
                               "typeIdentifier": "t_magic_message",
@@ -6503,7 +6503,7 @@
                           "name": "msg",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 669,
+                          "referencedDeclaration": 674,
                           "src": "2450:3:0",
                           "typeDescriptions": {
                             "typeIdentifier": "t_magic_message",
@@ -7161,10 +7161,10 @@
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        672,
-                        673
+                        677,
+                        678
                       ],
-                      "referencedDeclaration": 673,
+                      "referencedDeclaration": 678,
                       "src": "2750:7:0",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
@@ -7212,7 +7212,7 @@
                             "name": "msg",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 669,
+                            "referencedDeclaration": 674,
                             "src": "2883:3:0",
                             "typeDescriptions": {
                               "typeIdentifier": "t_magic_message",
@@ -7304,10 +7304,10 @@
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        672,
-                        673
+                        677,
+                        678
                       ],
-                      "referencedDeclaration": 673,
+                      "referencedDeclaration": 678,
                       "src": "2875:7:0",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
@@ -7415,10 +7415,10 @@
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        672,
-                        673
+                        677,
+                        678
                       ],
-                      "referencedDeclaration": 673,
+                      "referencedDeclaration": 678,
                       "src": "2982:7:0",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
@@ -7481,7 +7481,7 @@
                             "name": "msg",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 669,
+                            "referencedDeclaration": 674,
                             "src": "3110:3:0",
                             "typeDescriptions": {
                               "typeIdentifier": "t_magic_message",
@@ -7542,10 +7542,10 @@
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        672,
-                        673
+                        677,
+                        678
                       ],
-                      "referencedDeclaration": 673,
+                      "referencedDeclaration": 678,
                       "src": "3091:7:0",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
@@ -7617,7 +7617,7 @@
                         "name": "msg",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 669,
+                        "referencedDeclaration": 674,
                         "src": "3248:3:0",
                         "typeDescriptions": {
                           "typeIdentifier": "t_magic_message",
@@ -7800,7 +7800,7 @@
                           "name": "msg",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 669,
+                          "referencedDeclaration": 674,
                           "src": "3411:3:0",
                           "typeDescriptions": {
                             "typeIdentifier": "t_magic_message",
@@ -8080,7 +8080,7 @@
                           "name": "msg",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 669,
+                          "referencedDeclaration": 674,
                           "src": "3654:3:0",
                           "typeDescriptions": {
                             "typeIdentifier": "t_magic_message",
@@ -8341,7 +8341,7 @@
                           "name": "msg",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 669,
+                          "referencedDeclaration": 674,
                           "src": "3798:3:0",
                           "typeDescriptions": {
                             "typeIdentifier": "t_magic_message",
@@ -8698,7 +8698,7 @@
                           "name": "msg",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 669,
+                          "referencedDeclaration": 674,
                           "src": "4061:3:0",
                           "typeDescriptions": {
                             "typeIdentifier": "t_magic_message",
@@ -8972,269 +8972,6 @@
     "version": "0.5.16+commit.9c3226ce.Emscripten.clang"
   },
   "networks": {
-    "5777": {
-      "events": {
-        "0xd936b3e762b1512576cda3e4c015a059737f9370ba4037bd212c0299882f7635": {
-          "anonymous": false,
-          "inputs": [
-            {
-              "indexed": false,
-              "internalType": "uint256",
-              "name": "caseId",
-              "type": "uint256"
-            },
-            {
-              "indexed": false,
-              "internalType": "enum Marketplace.CaseType",
-              "name": "caseType",
-              "type": "uint8"
-            },
-            {
-              "indexed": false,
-              "internalType": "string",
-              "name": "caseTitle",
-              "type": "string"
-            },
-            {
-              "indexed": false,
-              "internalType": "string",
-              "name": "caseDescribtion",
-              "type": "string"
-            },
-            {
-              "indexed": false,
-              "internalType": "string",
-              "name": "caseLocation",
-              "type": "string"
-            },
-            {
-              "indexed": false,
-              "internalType": "uint256",
-              "name": "casePrice",
-              "type": "uint256"
-            },
-            {
-              "indexed": false,
-              "internalType": "string",
-              "name": "caseDocs",
-              "type": "string"
-            },
-            {
-              "indexed": false,
-              "internalType": "address payable",
-              "name": "owner",
-              "type": "address"
-            },
-            {
-              "indexed": false,
-              "internalType": "bool",
-              "name": "isPurchased",
-              "type": "bool"
-            }
-          ],
-          "name": "CaseCreated",
-          "type": "event"
-        },
-        "0xd145535c4d5bd18a066437e7c69f77ff80ffce591db88a37e86225addc913835": {
-          "anonymous": false,
-          "inputs": [
-            {
-              "indexed": false,
-              "internalType": "uint256",
-              "name": "caseId",
-              "type": "uint256"
-            },
-            {
-              "indexed": false,
-              "internalType": "enum Marketplace.CaseType",
-              "name": "caseType",
-              "type": "uint8"
-            },
-            {
-              "indexed": false,
-              "internalType": "string",
-              "name": "caseTitle",
-              "type": "string"
-            },
-            {
-              "indexed": false,
-              "internalType": "string",
-              "name": "caseDescribtion",
-              "type": "string"
-            },
-            {
-              "indexed": false,
-              "internalType": "string",
-              "name": "caseLocation",
-              "type": "string"
-            },
-            {
-              "indexed": false,
-              "internalType": "uint256",
-              "name": "casePrice",
-              "type": "uint256"
-            },
-            {
-              "indexed": false,
-              "internalType": "string",
-              "name": "caseDocs",
-              "type": "string"
-            },
-            {
-              "indexed": false,
-              "internalType": "address payable",
-              "name": "owner",
-              "type": "address"
-            },
-            {
-              "indexed": false,
-              "internalType": "bool",
-              "name": "isPurchased",
-              "type": "bool"
-            }
-          ],
-          "name": "CasePurchased",
-          "type": "event"
-        },
-        "0x93e122aeac6122f94a179fbf4bed1856ca880248cdf36756ca4b95246fd71018": {
-          "anonymous": false,
-          "inputs": [
-            {
-              "indexed": false,
-              "internalType": "uint256",
-              "name": "caseId",
-              "type": "uint256"
-            },
-            {
-              "indexed": false,
-              "internalType": "enum Marketplace.CaseType",
-              "name": "caseType",
-              "type": "uint8"
-            },
-            {
-              "indexed": false,
-              "internalType": "string",
-              "name": "caseTitle",
-              "type": "string"
-            },
-            {
-              "indexed": false,
-              "internalType": "string",
-              "name": "caseDescribtion",
-              "type": "string"
-            },
-            {
-              "indexed": false,
-              "internalType": "string",
-              "name": "caseLocation",
-              "type": "string"
-            },
-            {
-              "indexed": false,
-              "internalType": "uint256",
-              "name": "casePrice",
-              "type": "uint256"
-            },
-            {
-              "indexed": false,
-              "internalType": "string",
-              "name": "caseDocs",
-              "type": "string"
-            },
-            {
-              "indexed": false,
-              "internalType": "string",
-              "name": "caseDecKey",
-              "type": "string"
-            },
-            {
-              "indexed": false,
-              "internalType": "address payable",
-              "name": "owner",
-              "type": "address"
-            },
-            {
-              "indexed": false,
-              "internalType": "bool",
-              "name": "isPurchased",
-              "type": "bool"
-            }
-          ],
-          "name": "CaseCreated",
-          "type": "event"
-        },
-        "0x3145438c15f6993ebfade3de0d16d89d499eb5b1dc65e742d47dbbfead7d2623": {
-          "anonymous": false,
-          "inputs": [
-            {
-              "indexed": false,
-              "internalType": "uint256",
-              "name": "caseId",
-              "type": "uint256"
-            },
-            {
-              "indexed": false,
-              "internalType": "enum Marketplace.CaseType",
-              "name": "caseType",
-              "type": "uint8"
-            },
-            {
-              "indexed": false,
-              "internalType": "string",
-              "name": "caseTitle",
-              "type": "string"
-            },
-            {
-              "indexed": false,
-              "internalType": "string",
-              "name": "caseDescribtion",
-              "type": "string"
-            },
-            {
-              "indexed": false,
-              "internalType": "string",
-              "name": "caseLocation",
-              "type": "string"
-            },
-            {
-              "indexed": false,
-              "internalType": "uint256",
-              "name": "casePrice",
-              "type": "uint256"
-            },
-            {
-              "indexed": false,
-              "internalType": "string",
-              "name": "caseDocs",
-              "type": "string"
-            },
-            {
-              "indexed": false,
-              "internalType": "string",
-              "name": "caseDecKey",
-              "type": "string"
-            },
-            {
-              "indexed": false,
-              "internalType": "address payable",
-              "name": "owner",
-              "type": "address"
-            },
-            {
-              "indexed": false,
-              "internalType": "bool",
-              "name": "isPurchased",
-              "type": "bool"
-            }
-          ],
-          "name": "CasePurchased",
-          "type": "event"
-        }
-      },
-      "links": {},
-      "address": "0x885F53d8455c08E3f154A44E4F2AbF1b9046a929",
-      "transactionHash": "0x74c1e9da92bfd3ffae65766604d38e51c706312306c32b7abb1b13ffdb32bfa4"
-    },
     "4": {
       "events": {
         "0xd936b3e762b1512576cda3e4c015a059737f9370ba4037bd212c0299882f7635": {
@@ -9497,10 +9234,273 @@
       "links": {},
       "address": "0x064e384de522f0014571a68c54050005550ec253",
       "transactionHash": "0xb7f8f5301f4cf5042a81870120987803c8580c084698075c42401f97da7ef347"
+    },
+    "5777": {
+      "events": {
+        "0xd936b3e762b1512576cda3e4c015a059737f9370ba4037bd212c0299882f7635": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "caseId",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "internalType": "enum Marketplace.CaseType",
+              "name": "caseType",
+              "type": "uint8"
+            },
+            {
+              "indexed": false,
+              "internalType": "string",
+              "name": "caseTitle",
+              "type": "string"
+            },
+            {
+              "indexed": false,
+              "internalType": "string",
+              "name": "caseDescribtion",
+              "type": "string"
+            },
+            {
+              "indexed": false,
+              "internalType": "string",
+              "name": "caseLocation",
+              "type": "string"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "casePrice",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "internalType": "string",
+              "name": "caseDocs",
+              "type": "string"
+            },
+            {
+              "indexed": false,
+              "internalType": "address payable",
+              "name": "owner",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "bool",
+              "name": "isPurchased",
+              "type": "bool"
+            }
+          ],
+          "name": "CaseCreated",
+          "type": "event"
+        },
+        "0xd145535c4d5bd18a066437e7c69f77ff80ffce591db88a37e86225addc913835": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "caseId",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "internalType": "enum Marketplace.CaseType",
+              "name": "caseType",
+              "type": "uint8"
+            },
+            {
+              "indexed": false,
+              "internalType": "string",
+              "name": "caseTitle",
+              "type": "string"
+            },
+            {
+              "indexed": false,
+              "internalType": "string",
+              "name": "caseDescribtion",
+              "type": "string"
+            },
+            {
+              "indexed": false,
+              "internalType": "string",
+              "name": "caseLocation",
+              "type": "string"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "casePrice",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "internalType": "string",
+              "name": "caseDocs",
+              "type": "string"
+            },
+            {
+              "indexed": false,
+              "internalType": "address payable",
+              "name": "owner",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "bool",
+              "name": "isPurchased",
+              "type": "bool"
+            }
+          ],
+          "name": "CasePurchased",
+          "type": "event"
+        },
+        "0x93e122aeac6122f94a179fbf4bed1856ca880248cdf36756ca4b95246fd71018": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "caseId",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "internalType": "enum Marketplace.CaseType",
+              "name": "caseType",
+              "type": "uint8"
+            },
+            {
+              "indexed": false,
+              "internalType": "string",
+              "name": "caseTitle",
+              "type": "string"
+            },
+            {
+              "indexed": false,
+              "internalType": "string",
+              "name": "caseDescribtion",
+              "type": "string"
+            },
+            {
+              "indexed": false,
+              "internalType": "string",
+              "name": "caseLocation",
+              "type": "string"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "casePrice",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "internalType": "string",
+              "name": "caseDocs",
+              "type": "string"
+            },
+            {
+              "indexed": false,
+              "internalType": "string",
+              "name": "caseDecKey",
+              "type": "string"
+            },
+            {
+              "indexed": false,
+              "internalType": "address payable",
+              "name": "owner",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "bool",
+              "name": "isPurchased",
+              "type": "bool"
+            }
+          ],
+          "name": "CaseCreated",
+          "type": "event"
+        },
+        "0x3145438c15f6993ebfade3de0d16d89d499eb5b1dc65e742d47dbbfead7d2623": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "caseId",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "internalType": "enum Marketplace.CaseType",
+              "name": "caseType",
+              "type": "uint8"
+            },
+            {
+              "indexed": false,
+              "internalType": "string",
+              "name": "caseTitle",
+              "type": "string"
+            },
+            {
+              "indexed": false,
+              "internalType": "string",
+              "name": "caseDescribtion",
+              "type": "string"
+            },
+            {
+              "indexed": false,
+              "internalType": "string",
+              "name": "caseLocation",
+              "type": "string"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "casePrice",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "internalType": "string",
+              "name": "caseDocs",
+              "type": "string"
+            },
+            {
+              "indexed": false,
+              "internalType": "string",
+              "name": "caseDecKey",
+              "type": "string"
+            },
+            {
+              "indexed": false,
+              "internalType": "address payable",
+              "name": "owner",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "bool",
+              "name": "isPurchased",
+              "type": "bool"
+            }
+          ],
+          "name": "CasePurchased",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0x885F53d8455c08E3f154A44E4F2AbF1b9046a929",
+      "transactionHash": "0x74c1e9da92bfd3ffae65766604d38e51c706312306c32b7abb1b13ffdb32bfa4"
     }
   },
   "schemaVersion": "3.0.23",
-  "updatedAt": "2020-04-22T12:05:06.265Z",
+  "updatedAt": "2020-05-13T10:42:07.683Z",
   "networkType": "ethereum",
   "devdoc": {
     "methods": {}

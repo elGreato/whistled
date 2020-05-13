@@ -7,6 +7,7 @@
     "bootstrap": "^4.4.1",
     "chai": "^4.2.0",
     "crypto": "^1.0.1",
+    "ethereumjs-wallet": "^0.6.3",
     "fs": "0.0.1-security",
     "history": "^4.10.1",
     "ipfs-http-client": "^33.1.1",

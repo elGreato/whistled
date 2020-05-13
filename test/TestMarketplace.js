@@ -53,7 +53,7 @@ contract("Marketplace", accounts => { //accounts are injected by Ganache, it's a
 
     it("creates Cases", async () => {
       // SUCCESS
-      assert.equal(caseCount, 1);
+      assert.equal(caseCount, 9);
 
       const event = result.logs[0].args;//extract the logs values
 

@@ -15,6 +15,7 @@ contract WhistledChat {
 
     struct Member {
         address memAddress;
+        string pubKey;
         uint256 messageStartBlock;
         bool isMember;
     }
@@ -53,13 +54,13 @@ contract WhistledChat {
 
     event acceptContactEvent(address theAccepting, address theAccepted);
 
-    function join() public {
+    function join(string memory pk) public {
         require(
             members[msg.sender].isMember == false,
             "You are already a member"
         );
 
-        Member memory newMember = Member(msg.sender, block.number, true);
+        Member memory newMember = Member(msg.sender,pk, block.number, true);
         members[msg.sender] = newMember;
         membersCount++;
 
