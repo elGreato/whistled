@@ -135,7 +135,6 @@ class App extends Component {
 
   purchaseCase(_caseId, _casePrice) {
     this.setState({ loading: true })
-    console.log('id we receive', _caseId)
     this.state.contract.methods
       .purchaseCase(_caseId)
       .send({ from: this.state.accounts[0], value: _casePrice })
@@ -147,7 +146,6 @@ class App extends Component {
   getCaseDocs(_caseId) {
     let res;
     this.setState({ loading: true })
-    console.log('id of case receive', _caseId)
     res = this.state.contract.methods
       .getCaseDocs(_caseId)
       .send({ from: this.state.accounts[0] })

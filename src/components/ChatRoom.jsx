@@ -28,8 +28,6 @@ class ChatRoom extends Component {
 			isNowMember: false,
 		};
 
-		console.log('chat cont', this.state.chatContract);
-
 		this.joinChat = this.joinChat.bind(this); //bind even if  you don't export
 		this.requestContact = this.requestContact.bind(this);
 		this.getRelation = this.getRelation.bind(this);
@@ -108,7 +106,6 @@ class ChatRoom extends Component {
 	async checkMembership() {
 		var mbr = await this.state.chatContract.methods.members(this.state.account).call();
 		this.setState({ isNowMember: mbr.isMember });
-		console.log('is member: ', this.state.isNowMember);
 	}
 
 	async joinChat(e) {
@@ -151,13 +148,10 @@ class ChatRoom extends Component {
 
 	async getRelation() {
 		await this.getRequestingContacts();
-
 		let copy = [];
-
 		for (var i = 0; i < this.state.requestingList.length; i++) {
 			let requester = this.state.requestingList[i];
 			let relation = await this.state.chatContract.methods.getRelationWith(requester).call();
-
 			copy[requester] = relation;
 		}
 		this.setState({ currentRelations: copy });
@@ -229,13 +223,16 @@ class ChatRoom extends Component {
 			console.error('please enter a correct msg');
 		}
 	}
+
 	updateInput(event) {
 		this.setState({ msgToSend: event.target.value });
 	}
+
 	updatePK(event) {
 		this.setState({ privateKey: Buffer.from(event.target.value, 'hex') });
 		console.log(this.state.privateKey);
 	}
+	
 	changeChattingTo(add) {
 		this.setState({ chatingTo: add });
 
