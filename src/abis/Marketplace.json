@@ -9235,6 +9235,269 @@
       "address": "0x064e384de522f0014571a68c54050005550ec253",
       "transactionHash": "0xb7f8f5301f4cf5042a81870120987803c8580c084698075c42401f97da7ef347"
     },
+    "3": {
+      "events": {
+        "0xd936b3e762b1512576cda3e4c015a059737f9370ba4037bd212c0299882f7635": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "caseId",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "internalType": "enum Marketplace.CaseType",
+              "name": "caseType",
+              "type": "uint8"
+            },
+            {
+              "indexed": false,
+              "internalType": "string",
+              "name": "caseTitle",
+              "type": "string"
+            },
+            {
+              "indexed": false,
+              "internalType": "string",
+              "name": "caseDescribtion",
+              "type": "string"
+            },
+            {
+              "indexed": false,
+              "internalType": "string",
+              "name": "caseLocation",
+              "type": "string"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "casePrice",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "internalType": "string",
+              "name": "caseDocs",
+              "type": "string"
+            },
+            {
+              "indexed": false,
+              "internalType": "address payable",
+              "name": "owner",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "bool",
+              "name": "isPurchased",
+              "type": "bool"
+            }
+          ],
+          "name": "CaseCreated",
+          "type": "event"
+        },
+        "0xd145535c4d5bd18a066437e7c69f77ff80ffce591db88a37e86225addc913835": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "caseId",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "internalType": "enum Marketplace.CaseType",
+              "name": "caseType",
+              "type": "uint8"
+            },
+            {
+              "indexed": false,
+              "internalType": "string",
+              "name": "caseTitle",
+              "type": "string"
+            },
+            {
+              "indexed": false,
+              "internalType": "string",
+              "name": "caseDescribtion",
+              "type": "string"
+            },
+            {
+              "indexed": false,
+              "internalType": "string",
+              "name": "caseLocation",
+              "type": "string"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "casePrice",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "internalType": "string",
+              "name": "caseDocs",
+              "type": "string"
+            },
+            {
+              "indexed": false,
+              "internalType": "address payable",
+              "name": "owner",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "bool",
+              "name": "isPurchased",
+              "type": "bool"
+            }
+          ],
+          "name": "CasePurchased",
+          "type": "event"
+        },
+        "0x93e122aeac6122f94a179fbf4bed1856ca880248cdf36756ca4b95246fd71018": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "caseId",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "internalType": "enum Marketplace.CaseType",
+              "name": "caseType",
+              "type": "uint8"
+            },
+            {
+              "indexed": false,
+              "internalType": "string",
+              "name": "caseTitle",
+              "type": "string"
+            },
+            {
+              "indexed": false,
+              "internalType": "string",
+              "name": "caseDescribtion",
+              "type": "string"
+            },
+            {
+              "indexed": false,
+              "internalType": "string",
+              "name": "caseLocation",
+              "type": "string"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "casePrice",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "internalType": "string",
+              "name": "caseDocs",
+              "type": "string"
+            },
+            {
+              "indexed": false,
+              "internalType": "string",
+              "name": "caseDecKey",
+              "type": "string"
+            },
+            {
+              "indexed": false,
+              "internalType": "address payable",
+              "name": "owner",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "bool",
+              "name": "isPurchased",
+              "type": "bool"
+            }
+          ],
+          "name": "CaseCreated",
+          "type": "event"
+        },
+        "0x3145438c15f6993ebfade3de0d16d89d499eb5b1dc65e742d47dbbfead7d2623": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "caseId",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "internalType": "enum Marketplace.CaseType",
+              "name": "caseType",
+              "type": "uint8"
+            },
+            {
+              "indexed": false,
+              "internalType": "string",
+              "name": "caseTitle",
+              "type": "string"
+            },
+            {
+              "indexed": false,
+              "internalType": "string",
+              "name": "caseDescribtion",
+              "type": "string"
+            },
+            {
+              "indexed": false,
+              "internalType": "string",
+              "name": "caseLocation",
+              "type": "string"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "casePrice",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "internalType": "string",
+              "name": "caseDocs",
+              "type": "string"
+            },
+            {
+              "indexed": false,
+              "internalType": "string",
+              "name": "caseDecKey",
+              "type": "string"
+            },
+            {
+              "indexed": false,
+              "internalType": "address payable",
+              "name": "owner",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "bool",
+              "name": "isPurchased",
+              "type": "bool"
+            }
+          ],
+          "name": "CasePurchased",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0x01bd171a3044de913b6b7665c33622278a842b6a",
+      "transactionHash": "0x4830a455c51988be102fee4f25298b2add422c6011b87effc0683252c5767ba2"
+    },
     "5777": {
       "events": {
         "0xd936b3e762b1512576cda3e4c015a059737f9370ba4037bd212c0299882f7635": {
@@ -9495,12 +9758,12 @@
         }
       },
       "links": {},
-      "address": "0xb2ac8fd152eba695bd19ecb9e0d2594ef8818940",
-      "transactionHash": "0x6993b745959db0b77c93a0b5b43d72f0cf9e89f2230e377df6e1c706df7572e6"
+      "address": "0xCca2857169348666985F560BCc64f588fd8152cd",
+      "transactionHash": "0x7ec791f5cb646646985fc2a787f990f864e94201cddaf9a8c47975cd5b2b3e81"
     }
   },
   "schemaVersion": "3.0.23",
-  "updatedAt": "2020-06-05T07:56:21.935Z",
+  "updatedAt": "2020-06-05T08:10:52.133Z",
   "networkType": "ethereum",
   "devdoc": {
     "methods": {}

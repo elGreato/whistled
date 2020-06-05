@@ -7974,6 +7974,95 @@
       "address": "0x13528e7dccffb2017786809683ceb3fceddb7a25",
       "transactionHash": "0x720efd7de6efba30036620cd17eb6e6bc13a33b69977656e3d94715797c105de"
     },
+    "3": {
+      "events": {
+        "0x47a21261971f27f6b8f9d4544c161e5460ea140246e78c519e951b39a877f388": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "address",
+              "name": "theAccepting",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "address",
+              "name": "theAccepted",
+              "type": "address"
+            }
+          ],
+          "name": "acceptContactEvent",
+          "type": "event"
+        },
+        "0x2e79a42d9626443e3bf4e774b989fe2179b483f037cbfc7e7ea48fa29b8f5267": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "address",
+              "name": "requester",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "address",
+              "name": "receiver",
+              "type": "address"
+            }
+          ],
+          "name": "addContactEvent",
+          "type": "event"
+        },
+        "0x6dc15866f16ccb265afd212167fbcae0b0fd203ba4bad85d6e53c8733d5248df": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "address",
+              "name": "msgSender",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "address",
+              "name": "msgReceiver",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "string",
+              "name": "messages",
+              "type": "string"
+            }
+          ],
+          "name": "messageSentEvent",
+          "type": "event"
+        },
+        "0xe80d6d2410f4748de3d0dcc56ada54e8c52872d2aa09ec619b68e9f31f94e028": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "address",
+              "name": "newMemberAddress",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "blockNum",
+              "type": "uint256"
+            }
+          ],
+          "name": "newMemberJoined",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0x94e1e40a5d7b655f21d62d43c6bce51fbca1ad41",
+      "transactionHash": "0xf7e187bfd84584f34b18e301e907361e7b0ea0ed4186ddfb1e348c3356ea0f38"
+    },
     "5777": {
       "events": {
         "0x47a21261971f27f6b8f9d4544c161e5460ea140246e78c519e951b39a877f388": {
@@ -8060,12 +8149,12 @@
         }
       },
       "links": {},
-      "address": "0xec1d24efde41a1e10c6aa3704c6ff8d632be97bb",
-      "transactionHash": "0x67fe8ce90bf46c220632c133b823d4c3c66216b7b4891478dd76d5a02b992120"
+      "address": "0x3d893F349EbAF6BE2245559d1B0FD9A09D7c4c83",
+      "transactionHash": "0x32da5655f12f91a883a2c46ad7fb927194723efa274dfd496b9fd4b4a0fbacbd"
     }
   },
   "schemaVersion": "3.0.23",
-  "updatedAt": "2020-06-05T07:56:21.940Z",
+  "updatedAt": "2020-06-05T08:10:52.138Z",
   "networkType": "ethereum",
   "devdoc": {
     "methods": {}
