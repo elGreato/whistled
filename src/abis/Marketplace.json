@@ -9495,12 +9495,12 @@
         }
       },
       "links": {},
-      "address": "0x885F53d8455c08E3f154A44E4F2AbF1b9046a929",
-      "transactionHash": "0x74c1e9da92bfd3ffae65766604d38e51c706312306c32b7abb1b13ffdb32bfa4"
+      "address": "0xb2ac8fd152eba695bd19ecb9e0d2594ef8818940",
+      "transactionHash": "0x6993b745959db0b77c93a0b5b43d72f0cf9e89f2230e377df6e1c706df7572e6"
     }
   },
   "schemaVersion": "3.0.23",
-  "updatedAt": "2020-05-13T10:42:07.683Z",
+  "updatedAt": "2020-06-05T07:56:21.935Z",
   "networkType": "ethereum",
   "devdoc": {
     "methods": {}
