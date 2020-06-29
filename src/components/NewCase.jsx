@@ -170,7 +170,7 @@ class NewCase extends Component {
                       value="0"
                       onChange={this.handleOptionChange}
                     />
-                    <label for="caseType1">Birbary</label>
+                    <label for="caseType1">Falsified Medicine</label>
                   </div>
 
                   <div class="form-check form-check-inline">
@@ -182,7 +182,7 @@ class NewCase extends Component {
                       value="1"
                       onChange={this.handleOptionChange}
                     />
-                    <label for="caseType2">Money Laundary</label>
+                    <label for="caseType2">Money Laundering</label>
                   </div>
 
                   <div class="form-check form-check-inline">
