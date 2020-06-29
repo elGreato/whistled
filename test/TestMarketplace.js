@@ -16,7 +16,7 @@ contract("Marketplace", accounts => { //accounts are injected by Ganache, it's a
   //        >> Deployment<<
   //describe comes from Mocha framework
   describe("deployment", async () => {
-    it("deploys successfully", async () => {
+    it("Marketplace smart contract deployed successfully", async () => {
       const address = await marketplace.address;
       assert.notEqual(address, 0x0);
       assert.notEqual(address, "");
@@ -24,7 +24,7 @@ contract("Marketplace", accounts => { //accounts are injected by Ganache, it's a
       assert.notEqual(address, undefined);
     });
 
-    it("has a name", async () => {
+    it("Smart contracted has correct name and address", async () => {
       const name = await marketplace.contractName();
       assert.equal(name, "Whistled Market");
     });
@@ -32,7 +32,7 @@ contract("Marketplace", accounts => { //accounts are injected by Ganache, it's a
 
 
   //    >> Cases Creation<<
-  describe("cases", async () => {
+  describe("Whistleblowing Functionalties", async () => {
     let result, caseCount;
     let type = 0;
     before(async () => {
@@ -51,23 +51,23 @@ contract("Marketplace", accounts => { //accounts are injected by Ganache, it's a
       caseCount = await marketplace.caseCount();
     });
 
-    it("creates Cases", async () => {
+    it("creates a test whistleblowing case", async () => {
       // SUCCESS
-      assert.equal(caseCount, 9);
+      assert.equal(caseCount, 1);
 
       const event = result.logs[0].args;//extract the logs values
 
       assert.equal(event.caseId.toNumber(), caseCount.toNumber(), "id is correct");
-      assert.equal(event.caseTitle, "money Laundary", " Title is correct");
-      assert.equal(event.caseLocation, "Zurich", "location is correct");
-      assert.equal(event.casePrice, "1000000000000000000", "price is correct");
+      assert.equal(event.caseTitle, "Fake Case: The Tiananmen Papers", " Title is correct");
+      assert.equal(event.caseLocation, "China", "location is correct");
+      assert.equal(event.casePrice, "2000000000000000000", "price is correct");
       assert.equal(event.owner, seller, " sender is correct");
       assert.equal(event.isPurchased, false, "purchase is correct");
-      //assert.equal(event.caseDocs, "Placeholder for a Link to IPFS ","Case Docs link is correct");
+      assert.equal(event.caseDocs, "https://ipfs.infura.io/ipfs/QmVpeceu7JCWLBskJgudkdQ8XnM2ExMZRorsv6sQchACjW","Case Docs link is correct");
     });
 
     //  >>Cases Listing<<
-    it('Lists cases', async () => {  //case is a reserved word in solidity use instance
+    it('Marketplace Lists the created cases', async () => {  //case is a reserved word in solidity use instance
 
       const instance = await marketplace.cases(caseCount);
       //SUCCESS
@@ -83,7 +83,7 @@ contract("Marketplace", accounts => { //accounts are injected by Ganache, it's a
 
     });
     //    >>Cases Selling<<
-    it('sells cases', async () => {
+    it('Whistlers can receive cases and funds', async () => {
 
       //track balance of seller (just for testing the receive fund)
       let oldSellerBalance

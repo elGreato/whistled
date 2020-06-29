@@ -19,8 +19,8 @@ contract("WhistledChat", accounts => { //accounts are injected by Ganache, it's 
 
     //        >> Deployment<<
     //describe comes from Mocha framework
-    describe("deployment of Chat", async () => {
-        it("Chat deploys successfully", async () => {
+    describe("deployment and functionalities", async () => {
+        it("Whistled Chat smart contract deployed successfully", async () => {
             const address = await whistledChat.address;
             assert.notEqual(address, 0x0);
             assert.notEqual(address, "");
@@ -28,19 +28,17 @@ contract("WhistledChat", accounts => { //accounts are injected by Ganache, it's 
             assert.notEqual(address, undefined);
         });
 
-        it("Chat has a name", async () => {
+        it("Smart contracted has correct name and address", async () => {
             const name = await whistledChat.contractName();
             assert.equal(name, "Whistled Chat");
         });
 
-        it('Encrypt/decrypt messages', () => {
+        it('Send, Encrypt,decrypt messages', () => {
             var pubkeyUser1 = '04' + utils.privateToPublic(acc1PrvKey).toString('hex');
             var pubkeyUser2 = '04' + utils.privateToPublic(acc2PrvKey).toString('hex');
             var secret1 = utils.computeSecret(acc1PrvKey, Buffer.from(pubkeyUser2, 'hex'));
             var secret2 = utils.computeSecret(acc2PrvKey, Buffer.from(pubkeyUser1, 'hex'));
-    
             assert.equal(secret1.toString('hex'), secret2.toString('hex'));
-    
             var message = 'this is just a test message';
             var encrypted = utils.encrypt(message, secret1);
             var decrypted = utils.decrypt(encrypted, secret2);

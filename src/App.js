@@ -171,7 +171,7 @@ class App extends Component {
           <Switch>
             <React.Fragment>
               {/** Switch allows only one component to render */}
-              <div className="App">
+              <div className="App-inner">
                 <Route
                   exact
                   path="/"
