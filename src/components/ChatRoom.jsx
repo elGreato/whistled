@@ -314,7 +314,9 @@ class ChatRoom extends Component {
 							</ul>
 							<form className="form-wrapper">
 								<fieldset className={`section ${this.state.sectionFirst}`}>
-									<h3>To be able to chat, you must join. for that you need your private key.</h3>
+									<h3>To be able to chat, you must join. for that you need your private key.
+										Your private key is used for encrypting your messages. your PK will never leave your browser
+									</h3>
 									<input type="text" name="pvtkey" placeholder="Enter your private key" onChange={(e) => this.updatePK(e.target.value)} />
 									<button type="button" className="btn-primary next-btn" onClick={this.joinChat}>Next</button>
 								</fieldset>

@@ -213,7 +213,7 @@ class NewCase extends Component {
 
                   {/*Case Price*/}
                   <div class="form-group">
-                    <legend for="casePrice">Case Price (ETH) </legend>
+                    <legend for="casePrice">Case Price (WEI) 1 ETH = 10^18 wei </legend>
                     <input
                       type="text"
                       class="form-control"
